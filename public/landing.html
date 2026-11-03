@@ -438,9 +438,22 @@
   @media (max-width:760px){ .footer__top{ grid-template-columns:1fr; gap:1.6rem; } }
 
   /* ---- Reveal on scroll (visible by default; JS enhances) ---- */
-  .js [data-reveal]{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+  .js [data-reveal]{ opacity:0; transform:translateY(30px) scale(.985); transition:opacity .75s cubic-bezier(.22,.61,.36,1), transform .75s cubic-bezier(.22,.61,.36,1); }
   .js [data-reveal].in{ opacity:1; transform:none; }
   @media (prefers-reduced-motion: reduce){ .js [data-reveal]{ opacity:1 !important; transform:none !important; transition:none; } }
+  /* staggered entrance inside grids */
+  .js .sports [data-reveal]:nth-child(2){ transition-delay:.06s; }
+  .js .sports [data-reveal]:nth-child(3){ transition-delay:.12s; }
+  .js .sports [data-reveal]:nth-child(4){ transition-delay:.18s; }
+  .js .sports [data-reveal]:nth-child(5){ transition-delay:.24s; }
+  .js .sports [data-reveal]:nth-child(6){ transition-delay:.30s; }
+  .js .feat [data-reveal]:nth-child(2){ transition-delay:.09s; }
+  .js .feat [data-reveal]:nth-child(3){ transition-delay:.18s; }
+  .js .tier-grid [data-reveal]:nth-child(2){ transition-delay:.06s; }
+  .js .tier-grid [data-reveal]:nth-child(3){ transition-delay:.12s; }
+  .js .tier-grid [data-reveal]:nth-child(4){ transition-delay:.18s; }
+  .js .tier-grid [data-reveal]:nth-child(5){ transition-delay:.24s; }
+  .js .tier-grid [data-reveal]:nth-child(6){ transition-delay:.30s; }
 
   /* stripe divider between bands */
   .bandtop{ height:7px; width:100%; display:flex; }
@@ -448,6 +461,36 @@
   .bandtop i:nth-child(1){ background:var(--navy); flex:6; }
   .bandtop i:nth-child(2){ background:var(--burgundy); flex:1; }
   .bandtop i:nth-child(3){ background:#fff; flex:1.4; }
+
+  /* ===== WOW: scroll progress bar ===== */
+  .scrollbar{ position:fixed; top:0; left:0; height:3px; width:0; z-index:60;
+    background:linear-gradient(90deg, var(--steel), var(--burgundy) 55%, #fff);
+    box-shadow:0 0 14px rgba(184,58,84,.7); }
+
+  /* ===== WOW: ticker / marquee band ===== */
+  .ticker{ background:var(--burgundy); color:#fff; overflow:hidden; position:relative;
+    border-top:1px solid rgba(255,255,255,.14); border-bottom:1px solid rgba(255,255,255,.14); }
+  .ticker::before,.ticker::after{ content:""; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none; }
+  .ticker::before{ left:0; background:linear-gradient(90deg,var(--burgundy),transparent); }
+  .ticker::after{ right:0; background:linear-gradient(270deg,var(--burgundy),transparent); }
+  .ticker__track{ display:inline-flex; white-space:nowrap; will-change:transform; animation:tickerMove 28s linear infinite; }
+  .ticker:hover .ticker__track{ animation-play-state:paused; }
+  .ticker__group{ display:inline-flex; align-items:center; padding:.8rem 0; font-weight:900; font-style:italic;
+    text-transform:uppercase; font-size:1rem; letter-spacing:.04em; }
+  .ticker__group b{ color:#fff; }
+  .ticker__group .ghost{ color:transparent; -webkit-text-stroke:1.2px rgba(255,255,255,.6); }
+  .ticker__group i{ font-style:normal; color:#f3b0bd; margin:0 1.15rem; font-size:.8em; }
+  @keyframes tickerMove{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .ticker__track{ animation:none; } }
+
+  /* ===== WOW: button shine sweep ===== */
+  .btn{ position:relative; overflow:hidden; }
+  .btn::after{ content:""; position:absolute; top:0; left:-120%; width:55%; height:100%; pointer-events:none;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.38), transparent); transform:skewX(-20deg); }
+  .btn:hover::after{ left:150%; transition:left .75s ease; }
+
+  /* ===== WOW: hero crest depth ===== */
+  .hero__crest{ transform-style:preserve-3d; will-change:transform; }
 </style>
 
 <!-- ======================= NAV ======================= -->
@@ -480,6 +523,7 @@
 
 <!-- ======================= HERO ======================= -->
 <main id="top">
+<div class="scrollbar" id="scrollbar" aria-hidden="true"></div>
 <section class="hero" id="hero">
   <svg class="hero__stars" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
     <defs>
@@ -529,6 +573,14 @@
     </div>
   </div>
 </section>
+
+<!-- ======================= TICKER ======================= -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="tickerTrack">
+    <div class="ticker__group"><b>Let's go NMB</b><i>✦</i><span class="ghost">Road to Austin 2027</span><i>✦</i><b>#NMBtoAustin</b><i>✦</i><b>July 25–30, 2027</b><i>✦</i><span class="ghost">Austin, Texas</span><i>✦</i></div>
+    <div class="ticker__group"><b>Let's go NMB</b><i>✦</i><span class="ghost">Road to Austin 2027</span><i>✦</i><b>#NMBtoAustin</b><i>✦</i><b>July 25–30, 2027</b><i>✦</i><span class="ghost">Austin, Texas</span><i>✦</i></div>
+  </div>
+</div>
 
 <!-- ======================= COUNTDOWN ======================= -->
 <section class="countdown" aria-label="Countdown to the Games">
@@ -1042,6 +1094,47 @@ const CONFIG = {
       });
     }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
     sections.forEach(function(s){ spy.observe(s); });
+  }
+
+  /* ---- WOW effects: scroll progress + hero parallax + crest tilt ---- */
+  var _bar = document.getElementById('scrollbar');
+  var _stars = document.querySelector('.hero__stars');
+  var _glow = document.querySelector('.hero__glow');
+  var _crest = document.querySelector('.hero__crest');
+  var _hero = document.getElementById('hero');
+  var _reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var _ticking = false;
+  function _onScrollFx(){
+    var y = window.scrollY || window.pageYOffset || 0;
+    var h = (document.documentElement.scrollHeight - window.innerHeight) || 1;
+    if (_bar) _bar.style.width = Math.min(100, Math.max(0, y / h * 100)) + '%';
+    if (!_reduce && y < window.innerHeight * 1.2){
+      if (_stars) _stars.style.transform = 'translate3d(0,' + (y * 0.16) + 'px,0)';
+      if (_glow) _glow.style.transform = 'translate3d(0,' + (y * 0.10) + 'px,0)';
+    }
+    _ticking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!_ticking){ _ticking = true; requestAnimationFrame(_onScrollFx); }
+  }, { passive: true });
+  _onScrollFx();
+
+  // 3D tilt of the hero crest following the pointer (desktop only).
+  if (!_reduce && _crest && _hero && window.matchMedia('(hover:hover)').matches){
+    _hero.addEventListener('mousemove', function(e){
+      var r = _hero.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      _crest.style.transition = 'transform .12s ease-out';
+      _crest.style.animation = 'none';
+      _crest.style.transform = 'perspective(850px) rotateY(' + (px * 11) + 'deg) rotateX(' + (-py * 11) + 'deg)';
+    });
+    _hero.addEventListener('mouseleave', function(){
+      _crest.style.transition = 'transform .4s ease';
+      _crest.style.transform = '';
+      // let the idle float animation resume
+      setTimeout(function(){ _crest.style.animation = ''; _crest.style.transition = ''; }, 420);
+    });
   }
 
   /* ---- Reveal on scroll (fail-safe: reveal all after 1.4s) ---- */
