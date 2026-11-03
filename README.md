@@ -1,51 +1,52 @@
 # NMB · Road to Austin 2027 — Landing page
 
-Landing page de la delegación **NMB (North Miami Beach / MARJCC)** rumbo a los
-**JCC Maccabi Games 2027** en Austin, Texas.
+Landing page for the **NMB (North Miami Beach / MARJCC)** delegation on the road
+to the **JCC Maccabi Games 2027** in Austin, Texas.
 
-La página es un único archivo autónomo: **`index.html`** (HTML + CSS + JS en línea,
-tipografía Montserrat desde Google Fonts). No requiere build ni dependencias.
+The page is a single self-contained file: **`index.html`** (inline HTML + CSS + JS,
+Montserrat typeface from Google Fonts). No build step or dependencies.
 
-## Secciones
+## Sections
 
 - **Hero** — "LET'S GO NMB! · Road to Austin 2027"
-- **Los Juegos** — qué son los JCC Maccabi Games
-- **El Equipo** — por qué apoyar a NMB (desde 1992, +40 atletas, $2,650/atleta)
-- **Deportes** — las 12 categorías (Soccer, Basketball, Volleyball, Tennis, Swimming)
-- **Galería** — fotos del año pasado (marcadores de posición, ver abajo)
-- **Registro** — formulario de atletas con los campos solicitados
-- **Sponsorship** — los 6 niveles de patrocinio ($500 – $12,000)
-- **Donar** — enlace a RedPodium
+- **The Games** — what the JCC Maccabi Games are
+- **Our Team** — why support NMB (since 1992, 40+ athletes, $2,650/athlete)
+- **Sports** — the 12 categories (Soccer, Basketball, Volleyball, Tennis, Swimming)
+- **Gallery** — last year's photos (placeholders, see below)
+- **Register** — athlete form with the requested fields
+- **Sponsorship** — the 6 sponsorship levels ($500 – $12,000)
+- **Donate** — RedPodium link
 
-## Pendiente de ti (configuración)
+## Your to-do (configuration)
 
-Abre `index.html` y busca el bloque **`CONFIG`** cerca del final (dentro del `<script>`):
+Open `index.html` and find the **`CONFIG`** block near the end (inside the `<script>`):
 
 ```js
 const CONFIG = {
-  salesforceRegistrationUrl: "#", // ← pega aquí el link de registro de Salesforce
-  redpodiumDonationUrl: "#",      // ← pega aquí el link de donación de RedPodium
+  salesforceRegistrationUrl: "#", // ← paste the Salesforce registration link here
+  redpodiumDonationUrl: "#",      // ← paste the RedPodium donation link here
   ...
 };
 ```
 
-- Mientras estén en `"#"`, el botón **"Registro oficial"** y los botones **"Donar"**
-  se comportan de forma elegante (no rompen nada) y muestran un aviso de "próximamente".
-- Al pegar los enlaces reales, se abren automáticamente en una pestaña nueva.
+- While they stay `"#"`, the **"Official registration"** button and the **"Donate"**
+  buttons degrade gracefully (nothing breaks) and show a "coming soon" note.
+- Once you paste the real links, they open automatically in a new tab.
 
-### Otros reemplazos recomendados
+### Other recommended replacements
 
-- **Logo oficial:** el escudo es una recreación en SVG. Sustitúyelo por el archivo
-  oficial del brand book (buscar `class="crest"` / `class="hero__crest"`).
-- **Fotos del año pasado:** la galería usa marcadores de posición. Reemplaza los
-  `<div class="ph">` por `<img>` con las fotos reales (carpeta de Drive).
-  Publica fotos de menores solo con el consentimiento familiar que requiere el MARJCC.
-- **Formulario → Salesforce:** hoy el formulario muestra una confirmación en pantalla.
-  Para enviar los datos a Salesforce (Web-to-Lead), conecta el `submit` del
-  formulario `#regForm` a tu endpoint y mapea los `name` de los campos a los
-  IDs de Salesforce (ver nota en el HTML junto a `.formcard`).
+- **Official logo:** the crest is an SVG placeholder. Drop the official logo file at
+  `assets/nmb-logo-white.png` (white version, for the dark backgrounds) and swap the
+  `<svg class="crest">` / `<svg class="hero__crest">` blocks for an `<img>`.
+- **Last year's photos:** the gallery uses placeholders. Replace the
+  `<div class="ph">` tiles with `<img>` elements using the real photos (Drive folder).
+  Post photos of minors only with the family consent the MARJCC requires.
+- **Form → Salesforce:** today the form shows an on-screen confirmation. To send data
+  to Salesforce (Web-to-Lead), connect the `#regForm` submit handler to your endpoint
+  and map the field `name` attributes to your Salesforce field IDs (see the note in the
+  HTML next to `.formcard`).
 
 ## Branding
 
-Navy `#0A2342` · Burgundy `#800020` · White `#FFFFFF` · tipografía Montserrat.
-Basado en el *NMB Brand Book 2027*.
+Navy `#0A2342` · Burgundy `#800020` · White `#FFFFFF` · Montserrat typeface.
+Based on the *NMB Brand Book 2027*.
