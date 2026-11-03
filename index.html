@@ -306,18 +306,15 @@
   @media (max-width:440px){ .sports{ grid-template-columns:1fr; } }
 
   /* ---- Gallery ---- */
-  .gallery{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:150px; gap:12px; }
-  .ph{ position:relative; overflow:hidden; border-radius:12px; border:1px solid var(--line-on-navy);
-    background:linear-gradient(150deg,var(--navy-700),var(--steel)); display:grid; place-items:center; }
+  .gallery{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .ph{ position:relative; overflow:hidden; border-radius:12px; border:1px solid var(--line-on-navy); aspect-ratio:3/2;
+    background:linear-gradient(150deg,var(--navy-700),var(--steel)); }
   .ph::before{ content:""; position:absolute; inset:0; opacity:.45; background-image:var(--stars-white); background-size:120px 104px; }
-  .ph .mk{ position:relative; z-index:1; color:rgba(255,255,255,.55); }
-  .ph .mk svg{ width:40px; height:40px; }
-  .ph.tall{ grid-row:span 2; }
-  .ph.wide{ grid-column:span 2; }
   .gallery__note{ margin-top:1.1rem; display:flex; gap:.7rem; align-items:flex-start; color:#cfd7e5; font-size:.9rem;
     background:rgba(255,255,255,.05); border:1px dashed var(--line-on-navy); border-radius:12px; padding:.9rem 1.1rem; }
   .gallery__note b{ color:#fff; }
-  @media (max-width:860px){ .gallery{ grid-template-columns:repeat(2,1fr); grid-auto-rows:130px; } .ph.wide{ grid-column:span 2; } }
+  @media (max-width:760px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:460px){ .gallery{ grid-template-columns:1fr; } }
   .ph img{ position:relative; z-index:1; width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
   .ph:hover img{ transform:scale(1.05); }
   .gallery__credit{ margin-top:1.1rem; font-size:.82rem; color:var(--muted-on-navy); letter-spacing:.02em; }
@@ -685,12 +682,12 @@
     </div>
 
     <div class="gallery" data-reveal>
-      <div class="ph wide tall"><img src="assets/gallery/nmb-01.webp" alt="NMB athletes playing basketball at the Games" loading="lazy"></div>
+      <div class="ph"><img src="assets/gallery/nmb-01.webp" alt="NMB athletes playing basketball at the Games" loading="lazy"></div>
       <div class="ph"><img src="assets/gallery/nmb-02.webp" alt="NMB soccer action at the Games" loading="lazy"></div>
       <div class="ph"><img src="assets/gallery/nmb-03.webp" alt="NMB soccer player on the attack" loading="lazy"></div>
       <div class="ph"><img src="assets/gallery/nmb-04.webp" alt="NMB tennis player mid-swing" loading="lazy"></div>
-      <div class="ph tall"><img src="assets/gallery/nmb-05.webp" alt="NMB basketball player driving to the basket" loading="lazy"></div>
-      <div class="ph wide"><img src="assets/gallery/nmb-06.webp" alt="NMB delegation showing their team pride" loading="lazy"></div>
+      <div class="ph"><img src="assets/gallery/nmb-05.webp" alt="NMB basketball player driving to the basket" loading="lazy"></div>
+      <div class="ph"><img src="assets/gallery/nmb-06.webp" alt="NMB delegation showing their team pride" loading="lazy"></div>
     </div>
 
     <p class="gallery__credit" data-reveal>Moments from last year's Games · <span>@NMB_JCCMACCABI</span></p>
