@@ -547,6 +547,44 @@
   .teamband__head p{ margin-top:.8rem; color:#cfd7e5; max-width:48ch; font-size:1.02rem; }
   .teamband__img{ position:relative; z-index:1; display:block; width:min(1240px,100%); margin:1rem auto 0;
     filter:drop-shadow(0 18px 30px rgba(0,0,0,.45)); }
+
+  /* ===== Timeline (Road to Austin) ===== */
+  .timeline{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem; }
+  .tstep{ position:relative; background:linear-gradient(165deg,var(--navy-700),var(--navy-800)); border:1px solid var(--line-on-navy); border-radius:16px; padding:1.5rem 1.35rem; }
+  .tstep .tnum{ width:46px; height:46px; border-radius:12px; display:grid; place-items:center; background:var(--burgundy); color:#fff; font-weight:900; font-style:italic; font-size:1.2rem; margin-bottom:1rem; }
+  .tstep h3{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:1.05rem; color:#fff; }
+  .tstep p{ margin-top:.5rem; color:#cbd4e3; font-size:.92rem; }
+  .tstep .tchev{ position:absolute; right:-0.95rem; top:50%; transform:translateY(-50%); color:var(--burgundy-400); font-weight:900; font-size:1.5rem; z-index:3; }
+  .tstep:last-child .tchev{ display:none; }
+  .tstep.is-goal{ background:linear-gradient(160deg,var(--burgundy),var(--burgundy-600)); border-color:var(--burgundy); }
+  .tstep.is-goal .tnum{ background:#fff; color:var(--burgundy); }
+  .tstep.is-goal p{ color:#f3d2d9; }
+  @media (max-width:820px){
+    .timeline{ grid-template-columns:1fr; gap:1.4rem; }
+    .tstep .tchev{ right:50%; top:auto; bottom:-1.15rem; transform:translateX(50%) rotate(90deg); }
+  }
+
+  /* ===== Sponsors wall ===== */
+  .sponsors-wall{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+  .swall{ aspect-ratio:3/2; border:1.5px dashed var(--line-on-light); border-radius:12px; display:grid; place-items:center;
+    background:#fff; color:var(--muted); font-weight:700; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; text-align:center; padding:1rem; }
+  .sponsors-cta{ margin-top:1.8rem; text-align:center; }
+  .sponsors-cta p{ color:var(--muted); margin-bottom:1rem; }
+  @media (max-width:760px){ .sponsors-wall{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ===== FAQ ===== */
+  .faq{ max-width:820px; margin:0 auto; display:grid; gap:.7rem; }
+  .faq details{ background:var(--navy-700); border:1px solid var(--line-on-navy); border-radius:12px; overflow:hidden; }
+  .faq summary{ list-style:none; cursor:pointer; padding:1.1rem 1.3rem; font-weight:800; font-size:1rem; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary .plus{ flex:none; width:24px; height:24px; position:relative; transition:transform .25s ease; color:var(--burgundy-400); }
+  .faq summary .plus::before, .faq summary .plus::after{ content:""; position:absolute; background:currentColor; border-radius:2px; }
+  .faq summary .plus::before{ left:50%; top:4px; width:2.5px; height:16px; transform:translateX(-50%); }
+  .faq summary .plus::after{ top:50%; left:4px; height:2.5px; width:16px; transform:translateY(-50%); }
+  .faq details[open] summary .plus{ transform:rotate(135deg); }
+  .faq .faq-a{ padding:0 1.3rem 1.2rem; color:#cbd4e3; font-size:.94rem; line-height:1.7; }
+  .faq .faq-a strong{ color:#fff; }
+  .faq .faq-a a{ color:var(--burgundy-400); font-weight:700; }
 </style>
 
 <!-- ======================= NAV ======================= -->
@@ -571,6 +609,7 @@
       <a class="link" href="#galeria">Gallery</a>
       <a class="link" href="#registro">Interest form</a>
       <a class="link" href="#sponsorship">Sponsorship</a>
+      <a class="link" href="#faq">FAQ</a>
       <a class="btn btn--sm" href="#donar" data-donate>Donate</a>
     </nav>
 
@@ -818,6 +857,46 @@
 
 <div class="bandtop" aria-hidden="true"><i></i><i></i><i></i></div>
 
+<!-- ======================= ROAD / TIMELINE ======================= -->
+<section class="section section--navy2" id="camino">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-title">The road to Austin</h2>
+      <p class="sub">Four steps from “I'm interested” to the opening ceremony.</p>
+    </div>
+    <div class="timeline">
+      <article class="tstep" data-reveal>
+        <div class="tnum">1</div>
+        <h3>Express interest</h3>
+        <p>Fill out the interest form so we know your athlete wants to represent NMB.</p>
+        <span class="tchev" aria-hidden="true">›</span>
+      </article>
+      <article class="tstep" data-reveal>
+        <div class="tnum">2</div>
+        <h3>We confirm</h3>
+        <p>Our team checks eligibility (ages 13–17) and shares the next steps with your family.</p>
+        <span class="tchev" aria-hidden="true">›</span>
+      </article>
+      <article class="tstep" data-reveal>
+        <div class="tnum">3</div>
+        <h3>Train &amp; gear up</h3>
+        <p>Practices, uniforms and team prep through the season as we build the delegation.</p>
+        <span class="tchev" aria-hidden="true">›</span>
+      </article>
+      <article class="tstep is-goal" data-reveal>
+        <div class="tnum">★</div>
+        <h3>Austin 2027</h3>
+        <p>July 25–30 — compete, connect and leave it all on the court. Let's go NMB!</p>
+        <span class="tchev" aria-hidden="true">›</span>
+      </article>
+    </div>
+    <div style="margin-top:2rem; text-align:center" data-reveal>
+      <a class="btn" href="#registro">Start with the interest form <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= REGISTRATION ======================= -->
 <section class="section section--navy" id="registro">
   <div class="wrap">
@@ -1045,6 +1124,76 @@
   </div>
 </section>
 
+<!-- ======================= SPONSORS WALL ======================= -->
+<section class="section section--white" id="sponsors">
+  <div class="wrap">
+    <div class="section__head" data-reveal style="text-align:center; margin-inline:auto">
+      <span class="eyebrow eyebrow--navy">Our community</span>
+      <h2 class="section-title">Thank you to our sponsors</h2>
+      <p class="sub">Local businesses and families helping send our athletes to Austin.</p>
+    </div>
+    <!-- NOTE (dev): replace each .swall with <img src="assets/sponsors/your-logo.png" alt="Sponsor name"> as logos come in. -->
+    <div class="sponsors-wall" data-reveal>
+      <div class="swall">Your logo here</div>
+      <div class="swall">Your logo here</div>
+      <div class="swall">Your logo here</div>
+      <div class="swall">Your logo here</div>
+      <div class="swall">Your logo here</div>
+      <div class="swall">Your logo here</div>
+      <div class="swall">Your logo here</div>
+      <div class="swall">Your logo here</div>
+    </div>
+    <div class="sponsors-cta" data-reveal>
+      <p>Want your business on this wall?</p>
+      <a class="btn" href="#sponsorship">Become a sponsor <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FAQ ======================= -->
+<section class="section section--navy" id="faq">
+  <div class="wrap">
+    <div class="section__head" data-reveal style="text-align:center; margin-inline:auto">
+      <span class="eyebrow">Good to know</span>
+      <h2 class="section-title">Frequently asked questions</h2>
+    </div>
+    <div class="faq" data-reveal>
+      <details>
+        <summary>Who can participate? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">The Games are for Jewish teen athletes <strong>ages 13–17</strong>. NMB athletes represent the North Miami Beach / MARJCC community — our team confirms each athlete's eligibility and division.</div>
+      </details>
+      <details>
+        <summary>When and where are the Games? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">The JCC Maccabi Games 2027 take place <strong>July 25–30, 2027</strong> in <strong>Austin, Texas</strong> — Austin's third time hosting.</div>
+      </details>
+      <details>
+        <summary>How much does it cost? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">Estimated <strong>$2,500 for JCC members</strong> and <strong>$2,700 for non-members</strong> (subject to change). This covers registration, transportation, accommodations, uniforms and more. Many families rely on sponsorships and donations — reach out if cost is a barrier.</div>
+      </details>
+      <details>
+        <summary>Which sports can my athlete join? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">This year NMB fields <strong>Soccer, Basketball, Tennis, Swimming and Football</strong>, across several age divisions. Choose a division on the interest form.</div>
+      </details>
+      <details>
+        <summary>Is this the official registration? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">Not yet — the form on this site is an <strong>interest form</strong>. Official registration and payment open later. Filling it out now helps us plan and hold your athlete's spot.</div>
+      </details>
+      <details>
+        <summary>Where do athletes stay during the Games? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">JCC Maccabi athletes are traditionally hosted by local Jewish families in the host city, as part of the experience. Full housing details are shared with confirmed athletes.</div>
+      </details>
+      <details>
+        <summary>How can I help if my child isn't competing? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">You can <a href="#sponsorship">sponsor the team</a> or <a href="#donar">donate</a> — every contribution helps send a young athlete to Austin.</div>
+      </details>
+      <details>
+        <summary>Who do I contact? <span class="plus" aria-hidden="true"></span></summary>
+        <div class="faq-a">Registration &amp; program: <strong>Tomas Glasermann</strong>, Head of Delegation — tomasg@marjcc.org. Sponsorship: <strong>Roxana Markus</strong> — roxanam@marjcc.org.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= DONATE ======================= -->
 <section class="donate" id="donar">
   <div class="wrap">
@@ -1164,7 +1313,7 @@ const CONFIG = {
   }
 
   /* ---- Active link on scroll ---- */
-  var sections = ['juegos','equipo','deportes','galeria','registro','sponsorship'].map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var sections = ['juegos','equipo','deportes','galeria','registro','sponsorship','faq'].map(function(id){ return document.getElementById(id); }).filter(Boolean);
   var linkFor = {};
   document.querySelectorAll('.nav__links a.link').forEach(function(a){ var h=a.getAttribute('href'); if(h) linkFor[h.slice(1)] = a; });
   if ('IntersectionObserver' in window){
