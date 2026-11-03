@@ -130,7 +130,7 @@
   }
   .nav__bar{ height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
   .brandmark{ display:flex; align-items:center; gap:.6rem; color:#fff; }
-  .brandmark .crest{ width:38px; height:40px; flex:none; }
+  .brandmark .crest{ width:auto; height:46px; flex:none; }
   .brandmark b{ font-weight:900; font-style:italic; font-size:1.18rem; letter-spacing:.02em; }
   .brandmark span{ font-weight:600; font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-on-navy); display:block; margin-top:1px; }
   .nav__links{ display:flex; align-items:center; gap:1.4rem; }
@@ -390,7 +390,7 @@
   /* ---- Footer ---- */
   .footer{ background:var(--navy-900); color:#cdd5e3; padding-block:clamp(2.6rem,5vw,3.6rem) 2rem; border-top:1px solid var(--line-on-navy); }
   .footer__top{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:2rem; }
-  .footer .crest{ width:72px; height:76px; color:#fff; }
+  .footer .crest{ width:auto; height:72px; }
   .footer__tag{ font-weight:900; font-style:italic; text-transform:uppercase; color:#fff; font-size:1.3rem; margin-top:1rem; }
   .footer__tag .chev{ color:var(--burgundy-400); }
   .footer h4{ font-weight:800; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:#8f9bb3; margin-bottom:1rem; }
@@ -427,18 +427,8 @@
 <!-- ======================= NAV ======================= -->
 <header class="nav" id="nav">
   <div class="wrap nav__bar">
-    <a class="brandmark" href="#top" aria-label="NMB · MARJCC — home">
-      <svg class="crest" viewBox="0 0 200 210" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round">
-          <polygon points="100,15 26.4,142.5 173.6,142.5"/>
-          <polygon points="100,195 26.4,57.5 173.6,57.5"/>
-        </g>
-        <text x="100" y="118" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-style="italic" font-size="52" fill="currentColor">NMB</text>
-      </svg>
-      <span style="line-height:1">
-        <b>NMB</b>
-        <span>MARJCC · North Miami Beach</span>
-      </span>
+    <a class="brandmark" href="#top" aria-label="NMB · MARJCC North Miami Beach — home">
+      <img class="crest" src="assets/nmb-logo-white.webp" alt="NMB — MARJCC North Miami Beach">
     </a>
 
     <nav class="nav__links" id="navlinks" aria-label="Main navigation">
@@ -502,16 +492,7 @@
       </div>
 
       <div class="hero__crestwrap">
-        <svg class="hero__crest" viewBox="0 0 220 250" aria-label="NMB delegation crest">
-          <g fill="none" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round">
-            <polygon points="110,18 31,156 189,156"/>
-            <polygon points="110,214 31,76 189,76"/>
-          </g>
-          <text x="110" y="88" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="15" letter-spacing="4" fill="currentColor">MARJCC</text>
-          <text x="110" y="142" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-style="italic" font-size="62" fill="currentColor">NMB</text>
-          <text x="110" y="166" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="11" letter-spacing="3" fill="currentColor">NORTH MIAMI BEACH</text>
-          <text x="110" y="238" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-style="italic" font-size="10.5" letter-spacing="1.5" fill="currentColor">JCC NATIONAL MACCABI GAMES</text>
-        </svg>
+        <img class="hero__crest" src="assets/nmb-logo-white.webp" alt="NMB delegation crest — MARJCC North Miami Beach · JCC National Maccabi Games">
       </div>
     </div>
 
@@ -912,13 +893,8 @@
   <div class="wrap">
     <div class="footer__top">
       <div>
-        <svg class="crest" viewBox="0 0 200 210" aria-hidden="true">
-          <g fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round">
-            <polygon points="100,15 26.4,142.5 173.6,142.5"/>
-            <polygon points="100,195 26.4,57.5 173.6,57.5"/>
-          </g>
-          <text x="100" y="118" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-style="italic" font-size="52" fill="currentColor">NMB</text>
-        </svg>
+        <img class="crest" src="assets/nmb-logo-white.webp" alt="NMB — MARJCC North Miami Beach">
+
         <div class="footer__tag"><span class="chev">›</span> Let's go NMB!</div>
         <p style="color:#aeb9cc; margin-top:.6rem; font-size:.92rem; max-width:34ch">North Miami Beach delegation · Michael-Ann Russell JCC · JCC National Maccabi Games 2027.</p>
         <div style="margin-top:1rem"><span class="footer__hash">#NMBtoAustin</span></div>

@@ -35,9 +35,9 @@ const CONFIG = {
 
 ### Other recommended replacements
 
-- **Official logo:** the crest is an SVG placeholder. Drop the official logo file at
-  `assets/nmb-logo-white.png` (white version, for the dark backgrounds) and swap the
-  `<svg class="crest">` / `<svg class="hero__crest">` blocks for an `<img>`.
+- **Official logo:** integrated. The white logo lives at `assets/nmb-logo-white.webp`
+  and is used in the nav, hero, and footer (all dark backgrounds). If you need it on a
+  light surface later, add the navy version as `assets/nmb-logo-navy.webp`.
 - **Last year's photos:** the gallery uses placeholders. Replace the
   `<div class="ph">` tiles with `<img>` elements using the real photos (Drive folder).
   Post photos of minors only with the family consent the MARJCC requires.
