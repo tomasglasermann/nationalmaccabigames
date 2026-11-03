@@ -1156,23 +1156,43 @@ const CONFIG = {
     form.addEventListener('submit', function(ev){
       ev.preventDefault();
       if (!form.checkValidity()){ form.reportValidity(); return; }
-      var data = {
-        'Athlete': (form.participant_first_name.value + ' ' + form.participant_last_name.value).trim(),
-        'Phone': form.participant_phone.value,
-        'Sport': form.sport.value,
-        'Parent/Guardian': (form.parent1_first_name.value + ' ' + form.parent1_last_name.value).trim(),
-        'Email': form.parent1_email.value
+      var payload = {
+        participant_first_name: form.participant_first_name.value.trim(),
+        participant_last_name: form.participant_last_name.value.trim(),
+        participant_phone: form.participant_phone.value.trim(),
+        participant_dob: form.participant_dob.value,
+        parent1_first_name: form.parent1_first_name.value.trim(),
+        parent1_last_name: form.parent1_last_name.value.trim(),
+        parent1_email: form.parent1_email.value.trim(),
+        parent1_phone: form.parent1_phone.value.trim(),
+        sport: form.sport.value
       };
-      /* TODO (production): send `data` to Salesforce (Web-to-Lead) or your endpoint.
-         In this preview we show the confirmation directly. */
-      if (recap){
-        recap.innerHTML = Object.keys(data).map(function(k){
-          return '<div><strong>'+k+':</strong> '+ (data[k] ? escapeHtml(data[k]) : '—') +'</div>';
-        }).join('');
-      }
-      form.hidden = true;
-      if (success) success.classList.add('show');
-      if (success) success.scrollIntoView({behavior:'smooth', block:'center'});
+      var data = {
+        'Athlete': (payload.participant_first_name + ' ' + payload.participant_last_name).trim(),
+        'Phone': payload.participant_phone,
+        'Sport': payload.sport,
+        'Parent/Guardian': (payload.parent1_first_name + ' ' + payload.parent1_last_name).trim(),
+        'Email': payload.parent1_email
+      };
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      var finish = function(){
+        if (recap){
+          recap.innerHTML = Object.keys(data).map(function(k){
+            return '<div><strong>'+k+':</strong> '+ (data[k] ? escapeHtml(data[k]) : '—') +'</div>';
+          }).join('');
+        }
+        form.hidden = true;
+        if (success) success.classList.add('show');
+        if (success) success.scrollIntoView({behavior:'smooth', block:'center'});
+        if (btn) btn.disabled = false;
+      };
+      // Send to the backend; never block the user if the request fails.
+      fetch('/api/interest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(finish, finish);
     });
   }
   var resetBtn = document.getElementById('formReset');
