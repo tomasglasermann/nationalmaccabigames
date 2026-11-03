@@ -131,6 +131,8 @@
   .nav__bar{ height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
   .brandmark{ display:flex; align-items:center; gap:.6rem; color:#fff; }
   .brandmark .crest{ width:auto; height:46px; flex:none; }
+  .brandmark__sep{ width:1px; height:30px; background:var(--line-on-navy); flex:none; }
+  .brandmark .crest--marjcc{ height:40px; opacity:.95; }
   .brandmark b{ font-weight:900; font-style:italic; font-size:1.18rem; letter-spacing:.02em; }
   .brandmark span{ font-weight:600; font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-on-navy); display:block; margin-top:1px; }
   .nav__links{ display:flex; align-items:center; gap:1.4rem; }
@@ -436,8 +438,10 @@
 <!-- ======================= NAV ======================= -->
 <header class="nav" id="nav">
   <div class="wrap nav__bar">
-    <a class="brandmark" href="#top" aria-label="NMB · MARJCC North Miami Beach — home">
-      <img class="crest" src="assets/nmb-logo-white.webp" alt="NMB — MARJCC North Miami Beach">
+    <a class="brandmark" href="#top" aria-label="NMB and MARJCC — home">
+      <img class="crest" src="assets/nmb-logo-white.webp" alt="NMB — North Miami Beach delegation">
+      <span class="brandmark__sep" aria-hidden="true"></span>
+      <img class="crest crest--marjcc" src="assets/marjcc-logo-white.webp" alt="Michael-Ann Russell JCC (MARJCC)">
     </a>
 
     <nav class="nav__links" id="navlinks" aria-label="Main navigation">
