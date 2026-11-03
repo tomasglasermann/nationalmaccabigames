@@ -1,0 +1,1138 @@
+<title>NMB · Road to Austin 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Landing page de la delegación NMB del MARJCC rumbo a los JCC Maccabi Games 2027 en Austin, Texas. Registro de atletas, oportunidades de sponsorship y donaciones.">
+
+<style>
+  /* ============================================================
+     NMB · MARJCC — JCC Maccabi Games 2027 (Austin, TX)
+     Layout: dark navy brand world, full-bleed hero + banded sections,
+     diagonal-stripe + Star-of-David motifs, light form/section surfaces.
+     Single committed brand theme (navy / burgundy / white).
+     ============================================================ */
+  :root{
+    /* Color — brand palette (brand book §05) */
+    --navy:#0A2342;
+    --navy-800:#081d38;
+    --navy-900:#061527;
+    --navy-700:#102c53;
+    --navy-600:#163864;
+    --steel:#1C3A66;
+    --burgundy:#800020;
+    --burgundy-600:#9d0b2c;
+    --burgundy-400:#b83a54;
+    --white:#ffffff;
+    --cloud:#F2F3F6;
+    --cloud-2:#e7eaf0;
+    --ink:#0A2342;          /* text on light surfaces */
+    --muted:#5B6478;        /* support text gray */
+    --muted-on-navy:#aeb9cc;
+    --line-on-navy:rgba(255,255,255,.14);
+    --line-on-light:rgba(10,35,66,.12);
+
+    /* Type — Montserrat is the only official typeface (brand book §06) */
+    --font:'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+    /* Layout */
+    --maxw:1180px;
+    --nav-h:68px;
+    --radius:16px;
+    --gut-l:max(18px, env(safe-area-inset-left, 0px));
+    --gut-r:max(18px, env(safe-area-inset-right, 0px));
+
+    color-scheme: dark;
+    scroll-behavior:smooth;
+  }
+  @media (prefers-reduced-motion: reduce){ :root{ scroll-behavior:auto; } }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; }
+  body{
+    font-family:var(--font);
+    font-weight:500;
+    background:var(--navy-900);
+    color:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  html{ scroll-padding-top:calc(var(--nav-h) + 12px); }
+
+  h1,h2,h3,h4{ margin:0; line-height:1.02; text-wrap:balance; }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  ul{ margin:0; padding:0; list-style:none; }
+
+  .wrap{
+    width:100%; max-width:var(--maxw); margin-inline:auto;
+    padding-left:var(--gut-l); padding-right:var(--gut-r);
+  }
+
+  /* ---- Display type helpers ---- */
+  .eyebrow{
+    font-weight:700; font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--burgundy-400);
+  }
+  .eyebrow--navy{ color:var(--burgundy); }
+  .display{
+    font-weight:900; font-style:italic; text-transform:uppercase;
+    letter-spacing:-.01em; line-height:.92;
+  }
+  .section-title{
+    font-weight:900; font-style:italic; text-transform:uppercase;
+    font-size:clamp(1.9rem, 5.2vw, 3.1rem); line-height:.95; letter-spacing:-.01em;
+  }
+
+  /* ---- Diagonal speed stripes (navy → burgundy → white, leaning right) ---- */
+  .stripes{ display:inline-flex; gap:7px; height:16px; transform:skewX(-20deg); }
+  .stripes i{ width:13px; border-radius:2px; }
+  .stripes i:nth-child(1){ background:var(--navy); }
+  .stripes i:nth-child(2){ background:var(--burgundy); }
+  .stripes i:nth-child(3){ background:var(--white); }
+  .stripes--lg{ height:22px; gap:9px; }
+  .stripes--lg i{ width:18px; }
+  .on-navy .stripes i:nth-child(1){ background:#cdd6e6; }
+
+  /* ---- Buttons ---- */
+  .btn{
+    --bg:var(--burgundy); --fg:#fff; --bd:transparent;
+    display:inline-flex; align-items:center; gap:.55em; justify-content:center;
+    font-weight:800; font-size:.92rem; letter-spacing:.04em; text-transform:uppercase;
+    padding:.92em 1.5em; border-radius:999px; cursor:pointer;
+    background:var(--bg); color:var(--fg); border:2px solid var(--bd);
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    box-shadow:0 10px 24px -12px rgba(128,0,32,.8);
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn:active{ transform:translateY(0); }
+  .btn--ghost{ --bg:transparent; --fg:#fff; --bd:rgba(255,255,255,.55); box-shadow:none; }
+  .btn--ghost:hover{ --bg:rgba(255,255,255,.08); --bd:#fff; }
+  .btn--navy{ --bg:var(--navy); --fg:#fff; box-shadow:0 10px 24px -12px rgba(10,35,66,.9); }
+  .btn--outline-navy{ --bg:transparent; --fg:var(--navy); --bd:rgba(10,35,66,.3); box-shadow:none; }
+  .btn--outline-navy:hover{ --bd:var(--navy); --bg:rgba(10,35,66,.05); }
+  .btn--sm{ padding:.68em 1.15em; font-size:.8rem; }
+  .btn .arrow{ font-style:normal; transition:transform .18s ease; }
+  .btn:hover .arrow{ transform:translateX(3px); }
+  :focus-visible{ outline:3px solid var(--burgundy-400); outline-offset:3px; border-radius:4px; }
+
+  /* ============================================================ NAV */
+  .nav{
+    position:fixed; inset:0 0 auto 0; z-index:50;
+    padding-top:env(safe-area-inset-top, 0px);
+    background:transparent; transition:background .3s ease, box-shadow .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:rgba(6,21,39,.92);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border-bottom-color:var(--line-on-navy);
+    box-shadow:0 8px 30px -18px rgba(0,0,0,.9);
+  }
+  .nav__bar{ height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+  .brandmark{ display:flex; align-items:center; gap:.6rem; color:#fff; }
+  .brandmark .crest{ width:38px; height:40px; flex:none; }
+  .brandmark b{ font-weight:900; font-style:italic; font-size:1.18rem; letter-spacing:.02em; }
+  .brandmark span{ font-weight:600; font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-on-navy); display:block; margin-top:1px; }
+  .nav__links{ display:flex; align-items:center; gap:1.4rem; }
+  .nav__links a.link{
+    font-weight:700; font-size:.82rem; letter-spacing:.04em; text-transform:uppercase;
+    color:#dfe5ef; opacity:.85; transition:opacity .15s ease, color .15s ease; position:relative; padding:.3em 0;
+  }
+  .nav__links a.link:hover{ opacity:1; }
+  .nav__links a.link::after{
+    content:""; position:absolute; left:0; right:100%; bottom:-2px; height:2px; background:var(--burgundy-400);
+    transition:right .2s ease;
+  }
+  .nav__links a.link:hover::after, .nav__links a.link.active::after{ right:0; }
+  .nav__cta{ display:flex; align-items:center; gap:.7rem; }
+  .nav__toggle{ display:none; background:none; border:0; color:#fff; cursor:pointer; padding:.4rem; }
+  .nav__toggle svg{ width:28px; height:28px; }
+
+  @media (max-width:940px){
+    .nav__links{
+      position:absolute; top:100%; left:0; right:0;
+      flex-direction:column; align-items:stretch; gap:0;
+      background:rgba(6,21,39,.98); border-bottom:1px solid var(--line-on-navy);
+      padding:.5rem var(--gut-r) 1rem var(--gut-l);
+      max-height:0; overflow:hidden; transition:max-height .32s ease;
+    }
+    .nav__links.open{ max-height:420px; }
+    .nav__links a.link{ padding:.9rem .2rem; border-bottom:1px solid var(--line-on-navy); font-size:.95rem; }
+    .nav__links a.link::after{ display:none; }
+    .nav__links .btn{ margin-top:.9rem; }
+    .nav__toggle{ display:inline-flex; }
+    .nav__cta .btn--sm{ display:none; }
+  }
+
+  /* ============================================================ HERO */
+  .hero{
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(1200px 620px at 78% -8%, rgba(128,0,32,.42), transparent 60%),
+      radial-gradient(900px 500px at 8% 110%, rgba(28,58,102,.55), transparent 60%),
+      linear-gradient(160deg, var(--navy-800), var(--navy-900));
+    padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + clamp(2.5rem,7vw,5.5rem));
+    padding-bottom:clamp(3rem,7vw,6rem);
+  }
+  .hero__stars{ position:absolute; inset:0; z-index:0; opacity:.9; pointer-events:none; }
+  .hero__glow{ position:absolute; z-index:0; width:520px; height:520px; right:-120px; top:4%;
+    background:radial-gradient(circle, rgba(184,58,84,.28), transparent 68%); filter:blur(8px); pointer-events:none; }
+  .hero .wrap{ position:relative; z-index:2; }
+  .hero__grid{ display:grid; grid-template-columns:1.25fr .9fr; gap:clamp(1.5rem,4vw,3.5rem); align-items:center; }
+
+  .hero__kicker{ display:flex; align-items:center; gap:.9rem; margin-bottom:1.3rem; flex-wrap:wrap; }
+  .hero h1{ font-size:clamp(3rem, 11vw, 7rem); }
+  .hero h1 .go{ color:#fff; }
+  .hero h1 .nmb{ color:transparent; -webkit-text-stroke:2px var(--burgundy-400); }
+  @supports not ((-webkit-text-stroke: 2px #000)){ .hero h1 .nmb{ color:var(--burgundy-400); } }
+  .hero__sub{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:clamp(1.1rem,3.4vw,1.8rem);
+    letter-spacing:.01em; margin-top:.5rem; color:#fff; display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
+  .hero__sub .chev{ color:var(--burgundy-400); }
+  .hero__meta{ margin-top:1.4rem; display:flex; flex-wrap:wrap; gap:.55rem .8rem; }
+  .hero__meta .tag{
+    display:inline-flex; align-items:center; gap:.45rem; font-weight:700; font-size:.78rem; letter-spacing:.05em;
+    text-transform:uppercase; color:#e7ecf5; background:rgba(255,255,255,.07); border:1px solid var(--line-on-navy);
+    padding:.5em .9em; border-radius:999px;
+  }
+  .hero__meta .tag b{ color:#fff; }
+  .hero__lede{ margin-top:1.5rem; max-width:48ch; color:#d6ddea; font-size:1.02rem; }
+  .hero__actions{ margin-top:2rem; display:flex; flex-wrap:wrap; gap:.9rem; }
+
+  .hero__crestwrap{ position:relative; display:flex; justify-content:center; align-items:center; }
+  .hero__crest{ width:min(360px, 82%); color:#fff; filter:drop-shadow(0 24px 40px rgba(0,0,0,.45)); animation:floaty 7s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce){ .hero__crest{ animation:none; } }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+  .hero__crest .ring{ opacity:.0; }
+
+  .hero__scroll{ position:relative; z-index:2; margin-top:clamp(2rem,5vw,3.5rem); display:flex; align-items:center; gap:.6rem;
+    color:var(--muted-on-navy); font-weight:700; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; }
+  .hero__scroll .dot{ width:22px; height:34px; border:2px solid var(--line-on-navy); border-radius:12px; position:relative; }
+  .hero__scroll .dot::after{ content:""; position:absolute; left:50%; top:7px; width:3px; height:7px; border-radius:2px; background:var(--burgundy-400); transform:translateX(-50%); animation:scrolldot 1.8s ease-in-out infinite; }
+  @keyframes scrolldot{ 0%,100%{ opacity:.3; transform:translate(-50%,0);} 50%{ opacity:1; transform:translate(-50%,8px);} }
+  @media (prefers-reduced-motion: reduce){ .hero__scroll .dot::after{ animation:none; } }
+
+  @media (max-width:860px){
+    .hero__grid{ grid-template-columns:1fr; }
+    .hero__crestwrap{ order:-1; margin-bottom:.5rem; }
+    .hero__crest{ width:min(240px,62%); }
+  }
+
+  /* ============================================================ STATS */
+  .stats{ background:var(--burgundy); position:relative; overflow:hidden; }
+  .stats::before{ content:""; position:absolute; inset:0; opacity:.5;
+    background-image:var(--stars-burg); background-size:150px 130px; }
+  .stats .wrap{ position:relative; z-index:1; padding-block:clamp(2.2rem,4vw,3rem); }
+  .stats__row{ display:grid; grid-template-columns:repeat(6,1fr); gap:1rem; text-align:center; }
+  .stat .num{ font-weight:900; font-style:italic; font-size:clamp(1.9rem,5vw,3rem); color:#fff; line-height:1; font-variant-numeric:tabular-nums; }
+  .stat .lab{ margin-top:.4rem; font-weight:700; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:#f3d2d9; }
+  @media (max-width:760px){ .stats__row{ grid-template-columns:repeat(3,1fr); gap:1.4rem 1rem; } }
+  @media (max-width:420px){ .stats__row{ grid-template-columns:repeat(2,1fr); } }
+
+  /* ============================================================ Generic section */
+  .section{ padding-block:clamp(3.4rem,7vw,6rem); position:relative; }
+  .section--navy{ background:var(--navy-900); color:#fff; }
+  .section--navy2{ background:linear-gradient(180deg,var(--navy-900),var(--navy-800)); color:#fff; }
+  .section--light{ background:var(--cloud); color:var(--ink); }
+  .section--white{ background:#fff; color:var(--ink); }
+  .section__head{ max-width:62ch; margin-bottom:2.6rem; }
+  .section__head .section-title{ margin-top:.7rem; }
+  .section__head p.sub{ margin-top:1rem; font-size:1.05rem; }
+  .section--light .section__head p.sub, .section--white .section__head p.sub{ color:var(--muted); }
+  .section--navy .section__head p.sub, .section--navy2 .section__head p.sub{ color:#cfd7e5; }
+
+  /* ---- The Games: 2-col ---- */
+  .games__grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(1.6rem,4vw,3.2rem); align-items:start; }
+  .prose p + p{ margin-top:1rem; }
+  .prose strong{ color:#fff; }
+  .section--navy .prose{ color:#cbd4e3; }
+  .pullcard{
+    background:linear-gradient(165deg,var(--navy-700),var(--navy-800));
+    border:1px solid var(--line-on-navy); border-radius:var(--radius); padding:1.6rem; position:relative; overflow:hidden;
+  }
+  .pullcard::after{ content:""; position:absolute; right:-40px; top:-40px; width:160px; height:160px; background:radial-gradient(circle,rgba(184,58,84,.3),transparent 70%); }
+  .pullcard h3{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:1.3rem; color:#fff; }
+  .pullcard .big{ font-weight:900; font-style:italic; font-size:3rem; color:var(--burgundy-400); line-height:1; margin:.2rem 0 .1rem; }
+  .pullcard ul{ margin-top:1.1rem; display:grid; gap:.75rem; }
+  .pullcard li{ display:flex; gap:.7rem; align-items:flex-start; color:#d7deeb; font-size:.95rem; }
+  .pullcard li .chev{ color:var(--burgundy-400); flex:none; font-weight:900; }
+  @media (max-width:820px){ .games__grid{ grid-template-columns:1fr; } }
+
+  /* ---- Feature cards (Why support) ---- */
+  .feat{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; }
+  .feat .card{
+    background:#fff; border:1px solid var(--line-on-light); border-radius:var(--radius); padding:1.5rem;
+    box-shadow:0 20px 40px -32px rgba(10,35,66,.5);
+  }
+  .feat .card .ic{ width:46px; height:46px; border-radius:12px; display:grid; place-items:center; background:var(--navy); color:#fff; margin-bottom:1rem; }
+  .feat .card .ic svg{ width:24px; height:24px; }
+  .feat .card:nth-child(2) .ic{ background:var(--burgundy); }
+  .feat .card h3{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:1.12rem; color:var(--ink); }
+  .feat .card p{ margin-top:.5rem; color:var(--muted); font-size:.95rem; }
+  @media (max-width:760px){ .feat{ grid-template-columns:1fr; } }
+
+  /* ---- Sports ---- */
+  .sports{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+  .sport{
+    position:relative; overflow:hidden; border-radius:14px; padding:1.3rem 1.2rem 1.15rem;
+    background:linear-gradient(160deg,var(--navy-700),var(--navy-800));
+    border:1px solid var(--line-on-navy); transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .sport:hover{ transform:translateY(-4px); border-color:var(--burgundy-400); box-shadow:0 22px 40px -24px rgba(0,0,0,.8); }
+  .sport .ic{ width:40px; height:40px; color:var(--burgundy-400); margin-bottom:.8rem; }
+  .sport .ic svg{ width:100%; height:100%; }
+  .sport h3{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:1.05rem; color:#fff; }
+  .sport .cats{ margin-top:.7rem; display:flex; flex-wrap:wrap; gap:.4rem; }
+  .sport .cat{ font-weight:700; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:#dbe2ee;
+    background:rgba(255,255,255,.08); border:1px solid var(--line-on-navy); border-radius:999px; padding:.34em .7em; }
+  .sport::before{ content:""; position:absolute; right:-30px; bottom:-30px; width:90px; height:90px;
+    background:radial-gradient(circle,rgba(184,58,84,.22),transparent 70%); }
+  @media (max-width:960px){ .sports{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:440px){ .sports{ grid-template-columns:1fr; } }
+
+  /* ---- Gallery ---- */
+  .gallery{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:150px; gap:12px; }
+  .ph{ position:relative; overflow:hidden; border-radius:12px; border:1px solid var(--line-on-navy);
+    background:linear-gradient(150deg,var(--navy-700),var(--steel)); display:grid; place-items:center; }
+  .ph::before{ content:""; position:absolute; inset:0; opacity:.45; background-image:var(--stars-white); background-size:120px 104px; }
+  .ph .mk{ position:relative; z-index:1; color:rgba(255,255,255,.55); }
+  .ph .mk svg{ width:40px; height:40px; }
+  .ph.tall{ grid-row:span 2; }
+  .ph.wide{ grid-column:span 2; }
+  .gallery__note{ margin-top:1.1rem; display:flex; gap:.7rem; align-items:flex-start; color:#cfd7e5; font-size:.9rem;
+    background:rgba(255,255,255,.05); border:1px dashed var(--line-on-navy); border-radius:12px; padding:.9rem 1.1rem; }
+  .gallery__note b{ color:#fff; }
+  @media (max-width:860px){ .gallery{ grid-template-columns:repeat(2,1fr); grid-auto-rows:130px; } .ph.wide{ grid-column:span 2; } }
+
+  /* ---- Registration form ---- */
+  .reg__grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(1.6rem,4vw,3rem); align-items:start; }
+  .reg__aside h2{ color:#fff; }
+  .reg__aside .sub{ color:#cfd7e5; margin-top:1rem; }
+  .reg__points{ margin-top:1.6rem; display:grid; gap:1rem; }
+  .reg__points li{ display:flex; gap:.8rem; align-items:flex-start; }
+  .reg__points .n{ flex:none; width:30px; height:30px; border-radius:8px; background:var(--burgundy); color:#fff;
+    display:grid; place-items:center; font-weight:900; font-style:italic; font-size:.95rem; }
+  .reg__points b{ color:#fff; display:block; font-weight:800; }
+  .reg__points span{ color:#c3ccdb; font-size:.9rem; }
+  .reg__official{ margin-top:1.8rem; padding:1.1rem 1.2rem; border-radius:12px; border:1px solid var(--line-on-navy);
+    background:rgba(255,255,255,.05); }
+  .reg__official p{ font-size:.86rem; color:#c9d2e0; margin-bottom:.8rem; }
+
+  .formcard{ background:#fff; color:var(--ink); border-radius:var(--radius); padding:clamp(1.3rem,3vw,2rem);
+    box-shadow:0 30px 60px -36px rgba(0,0,0,.7); }
+  .formcard .legend{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:.78rem; letter-spacing:.08em;
+    color:var(--burgundy); display:flex; align-items:center; gap:.6rem; margin:0 0 1rem; }
+  .formcard .legend::after{ content:""; flex:1; height:2px; background:var(--line-on-light); }
+  .formcard .legend + .legend{ margin-top:1.8rem; }
+  .fgrid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem 1.1rem; }
+  .field{ display:flex; flex-direction:column; gap:.4rem; min-width:0; }
+  .field.full{ grid-column:1 / -1; }
+  .field label{ font-weight:700; font-size:.78rem; letter-spacing:.03em; text-transform:uppercase; color:var(--ink); }
+  .field label .req{ color:var(--burgundy); }
+  .field input, .field select{
+    font-family:inherit; font-size:.98rem; font-weight:500; color:var(--ink);
+    padding:.78em .9em; border:1.5px solid var(--line-on-light); border-radius:10px; background:var(--cloud);
+    transition:border-color .15s ease, box-shadow .15s ease, background .15s ease; width:100%;
+  }
+  .field input:focus, .field select:focus{ outline:none; border-color:var(--burgundy); background:#fff;
+    box-shadow:0 0 0 3px rgba(128,0,32,.12); }
+  .field .hint{ font-size:.74rem; color:var(--muted); }
+  .formcard .submit-row{ margin-top:1.6rem; display:flex; flex-wrap:wrap; align-items:center; gap:1rem; }
+  .formcard .submit-row .note{ font-size:.78rem; color:var(--muted); max-width:34ch; }
+  .form-success{ display:none; text-align:center; padding:1.5rem .5rem; }
+  .form-success.show{ display:block; }
+  .form-success .check{ width:60px; height:60px; margin:0 auto 1rem; border-radius:50%; background:var(--navy); color:#fff; display:grid; place-items:center; }
+  .form-success h3{ font-weight:900; font-style:italic; text-transform:uppercase; color:var(--ink); font-size:1.3rem; }
+  .form-success p{ color:var(--muted); margin-top:.5rem; }
+  .form-success .recap{ margin-top:1rem; text-align:left; display:inline-block; background:var(--cloud); border-radius:10px; padding:.9rem 1.1rem; font-size:.9rem; color:var(--ink); }
+  @media (max-width:820px){ .reg__grid{ grid-template-columns:1fr; } }
+  @media (max-width:520px){ .fgrid{ grid-template-columns:1fr; } }
+
+  /* ---- Sponsorship ---- */
+  .tier-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; }
+  .tier{
+    position:relative; display:flex; flex-direction:column; border-radius:var(--radius); overflow:hidden;
+    background:#fff; border:1px solid var(--line-on-light); box-shadow:0 20px 44px -34px rgba(10,35,66,.5);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .tier:hover{ transform:translateY(-5px); box-shadow:0 30px 50px -30px rgba(10,35,66,.55); }
+  .tier__top{ padding:1.4rem 1.4rem 1.2rem; background:var(--navy); color:#fff; position:relative; overflow:hidden; }
+  .tier__top::before{ content:""; position:absolute; inset:0; opacity:.5; background-image:var(--stars-white); background-size:120px 104px; }
+  .tier__top > *{ position:relative; z-index:1; }
+  .tier .name{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:1.12rem; letter-spacing:.01em; }
+  .tier .price{ font-weight:900; font-style:italic; font-size:2.1rem; margin-top:.3rem; line-height:1; font-variant-numeric:tabular-nums; }
+  .tier .price small{ font-size:.9rem; font-weight:700; opacity:.7; }
+  .tier__body{ padding:1.2rem 1.4rem 1.5rem; display:flex; flex-direction:column; gap:.8rem; flex:1; }
+  .tier__body li{ display:flex; gap:.6rem; align-items:flex-start; font-size:.9rem; color:var(--ink); }
+  .tier__body li .chk{ color:var(--burgundy); flex:none; font-weight:900; }
+  .tier__body .btn{ margin-top:auto; }
+  .tier.featured{ border-color:var(--burgundy); box-shadow:0 30px 60px -28px rgba(128,0,32,.55); }
+  .tier.featured .tier__top{ background:var(--burgundy); }
+  .tier .ribbon{ position:absolute; top:12px; right:-34px; transform:rotate(45deg); background:#fff; color:var(--burgundy);
+    font-weight:900; font-style:italic; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; padding:.3em 2.6em; z-index:2; }
+  @media (max-width:900px){ .tier-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .tier-grid{ grid-template-columns:1fr; } }
+
+  .spon-cta{ margin-top:2.2rem; display:flex; flex-wrap:wrap; gap:1rem 1.4rem; align-items:center; justify-content:space-between;
+    background:#fff; border:1px solid var(--line-on-light); border-radius:var(--radius); padding:1.4rem 1.6rem; }
+  .spon-cta .t{ font-weight:800; color:var(--ink); }
+  .spon-cta .t b{ color:var(--burgundy); font-style:italic; }
+  .spon-cta .acts{ display:flex; gap:.7rem; flex-wrap:wrap; }
+
+  /* ---- Donate band ---- */
+  .donate{ position:relative; overflow:hidden; background:linear-gradient(135deg,var(--burgundy),var(--burgundy-600)); color:#fff; }
+  .donate::before{ content:""; position:absolute; inset:0; opacity:.4; background-image:var(--stars-white); background-size:160px 138px; }
+  .donate .wrap{ position:relative; z-index:1; padding-block:clamp(3rem,6vw,4.6rem); text-align:center; }
+  .donate h2{ font-size:clamp(2rem,6vw,3.4rem); }
+  .donate p{ max-width:52ch; margin:1rem auto 0; color:#f6dde2; font-size:1.05rem; }
+  .donate .acts{ margin-top:2rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .donate .btn--navy{ box-shadow:0 14px 34px -14px rgba(0,0,0,.6); }
+
+  /* ---- Footer ---- */
+  .footer{ background:var(--navy-900); color:#cdd5e3; padding-block:clamp(2.6rem,5vw,3.6rem) 2rem; border-top:1px solid var(--line-on-navy); }
+  .footer__top{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:2rem; }
+  .footer .crest{ width:72px; height:76px; color:#fff; }
+  .footer__tag{ font-weight:900; font-style:italic; text-transform:uppercase; color:#fff; font-size:1.3rem; margin-top:1rem; }
+  .footer__tag .chev{ color:var(--burgundy-400); }
+  .footer h4{ font-weight:800; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:#8f9bb3; margin-bottom:1rem; }
+  .footer a.fl{ color:#dce2ee; display:inline-block; }
+  .footer a.fl:hover{ color:#fff; }
+  .contact-row{ display:flex; flex-direction:column; gap:.2rem; margin-bottom:1.1rem; }
+  .contact-row .role{ font-weight:700; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#8f9bb3; }
+  .contact-row .who{ color:#fff; font-weight:600; }
+  .copyline{ display:flex; align-items:center; gap:.5rem; }
+  .copybtn{ background:rgba(255,255,255,.08); border:1px solid var(--line-on-navy); color:#dce2ee; border-radius:7px;
+    font-size:.72rem; font-weight:700; padding:.3em .6em; cursor:pointer; letter-spacing:.04em; }
+  .copybtn:hover{ background:rgba(255,255,255,.16); color:#fff; }
+  .copybtn.copied{ background:var(--burgundy); color:#fff; border-color:var(--burgundy); }
+  .footer__addr{ font-style:normal; color:#aeb9cc; font-size:.9rem; line-height:1.7; }
+  .footer__bottom{ margin-top:2.4rem; padding-top:1.4rem; border-top:1px solid var(--line-on-navy);
+    display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; }
+  .footer__legal{ font-size:.72rem; color:#7f8aa1; max-width:70ch; line-height:1.6; }
+  .footer__hash{ font-weight:900; font-style:italic; text-transform:uppercase; color:#fff; letter-spacing:.02em; }
+  @media (max-width:760px){ .footer__top{ grid-template-columns:1fr; gap:1.6rem; } }
+
+  /* ---- Reveal on scroll (visible by default; JS enhances) ---- */
+  .js [data-reveal]{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+  .js [data-reveal].in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){ .js [data-reveal]{ opacity:1 !important; transform:none !important; transition:none; } }
+
+  /* stripe divider between bands */
+  .bandtop{ height:7px; width:100%; display:flex; }
+  .bandtop i{ flex:1; }
+  .bandtop i:nth-child(1){ background:var(--navy); flex:6; }
+  .bandtop i:nth-child(2){ background:var(--burgundy); flex:1; }
+  .bandtop i:nth-child(3){ background:#fff; flex:1.4; }
+</style>
+
+<!-- ======================= NAV ======================= -->
+<header class="nav" id="nav">
+  <div class="wrap nav__bar">
+    <a class="brandmark" href="#top" aria-label="NMB · MARJCC — inicio">
+      <svg class="crest" viewBox="0 0 200 210" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round">
+          <polygon points="100,15 26.4,142.5 173.6,142.5"/>
+          <polygon points="100,195 26.4,57.5 173.6,57.5"/>
+        </g>
+        <text x="100" y="118" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-style="italic" font-size="52" fill="currentColor">NMB</text>
+      </svg>
+      <span style="line-height:1">
+        <b>NMB</b>
+        <span>MARJCC · North Miami Beach</span>
+      </span>
+    </a>
+
+    <nav class="nav__links" id="navlinks" aria-label="Navegación principal">
+      <a class="link" href="#juegos">Los Juegos</a>
+      <a class="link" href="#equipo">El Equipo</a>
+      <a class="link" href="#deportes">Deportes</a>
+      <a class="link" href="#galeria">Galería</a>
+      <a class="link" href="#registro">Registro</a>
+      <a class="link" href="#sponsorship">Sponsorship</a>
+      <a class="btn btn--sm" href="#donar" data-donate>Donar</a>
+    </nav>
+
+    <div class="nav__cta">
+      <a class="btn btn--sm" href="#registro">Registrar atleta</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<main id="top">
+<section class="hero" id="hero">
+  <svg class="hero__stars" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="starPat" width="150" height="130" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+        <g fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1.6" stroke-linejoin="round">
+          <polygon points="75,22 33,96 117,96"/>
+          <polygon points="75,108 33,34 117,34"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#starPat)"/>
+  </svg>
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <div class="hero__kicker">
+          <span class="stripes stripes--lg on-navy" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="eyebrow">North Miami Beach · MARJCC</span>
+        </div>
+        <h1 class="display"><span class="go">Let's go</span> <span class="nmb">NMB!</span></h1>
+        <p class="hero__sub"><span class="chev">›</span> Road to Austin 2027</p>
+
+        <div class="hero__meta">
+          <span class="tag">JCC <b>National Maccabi Games</b></span>
+          <span class="tag">📍 <b>Austin, Texas</b></span>
+          <span class="tag">☀️ <b>Verano 2027</b></span>
+        </div>
+
+        <p class="hero__lede">La delegación de North Miami Beach vuelve a los Juegos. Somos un equipo, representamos a nuestra comunidad y dejamos todo en la cancha. Registra a tu atleta, patrocina al equipo o dona para enviar a nuestros jóvenes a Austin.</p>
+
+        <div class="hero__actions">
+          <a class="btn" href="#registro">Registrar atleta <span class="arrow">→</span></a>
+          <a class="btn btn--ghost" href="#sponsorship">Ver sponsorships</a>
+          <a class="btn btn--ghost" href="#donar" data-donate>Donar</a>
+        </div>
+      </div>
+
+      <div class="hero__crestwrap">
+        <svg class="hero__crest" viewBox="0 0 220 250" aria-label="Escudo de la delegación NMB">
+          <g fill="none" stroke="currentColor" stroke-width="5.5" stroke-linejoin="round">
+            <polygon points="110,18 31,156 189,156"/>
+            <polygon points="110,214 31,76 189,76"/>
+          </g>
+          <text x="110" y="88" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="15" letter-spacing="4" fill="currentColor">MARJCC</text>
+          <text x="110" y="142" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-style="italic" font-size="62" fill="currentColor">NMB</text>
+          <text x="110" y="166" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="11" letter-spacing="3" fill="currentColor">NORTH MIAMI BEACH</text>
+          <text x="110" y="238" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-style="italic" font-size="10.5" letter-spacing="1.5" fill="currentColor">JCC NATIONAL MACCABI GAMES</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="dot"></span> Desliza
+    </div>
+  </div>
+</section>
+
+<!-- ======================= STATS ======================= -->
+<section class="stats" aria-label="La delegación en números">
+  <div class="wrap">
+    <div class="stats__row">
+      <div class="stat"><div class="num" data-count="40" data-suffix="+">40+</div><div class="lab">Atletas NMB</div></div>
+      <div class="stat"><div class="num" data-count="12">12</div><div class="lab">Deportes</div></div>
+      <div class="stat"><div class="num" data-count="80" data-suffix="+">80+</div><div class="lab">JCCs</div></div>
+      <div class="stat"><div class="num" data-count="4">4</div><div class="lab">Países</div></div>
+      <div class="stat"><div class="num">12–16</div><div class="lab">Edades</div></div>
+      <div class="stat"><div class="num">1992</div><div class="lab">Desde</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= THE GAMES ======================= -->
+<section class="section section--navy2" id="juegos">
+  <div class="wrap">
+    <div class="games__grid">
+      <div data-reveal>
+        <span class="eyebrow">Qué son los Juegos</span>
+        <h2 class="section-title" style="margin-top:.7rem">El mayor evento deportivo juvenil judío del mundo</h2>
+        <div class="prose" style="margin-top:1.3rem">
+          <p>Los <strong>JCC Maccabi Games®</strong> son el evento deportivo juvenil judío más grande del mundo, conocidos como las <strong>“Olimpiadas Juveniles Judías”</strong>. Cada verano, miles de adolescentes de entre 12 y 16 años, provenientes de más de 80 JCCs de Estados Unidos, Canadá, México e Israel, se reúnen para competir, conectar y celebrar su herencia compartida.</p>
+          <p>Son mucho más que deporte: forjan identidad, trabajo en equipo, liderazgo y amistades para toda la vida. En <strong>2027 los Juegos regresan a Austin, Texas</strong> —la tercera vez que Austin es sede— y la delegación de North Miami Beach estará ahí.</p>
+        </div>
+        <div style="margin-top:1.6rem"><a class="btn btn--ghost btn--sm" href="#registro">Quiero participar <span class="arrow">→</span></a></div>
+      </div>
+
+      <aside class="pullcard" data-reveal aria-label="Datos del evento">
+        <h3>Road to Austin</h3>
+        <div class="big">2027</div>
+        <span class="eyebrow" style="color:var(--muted-on-navy)">Austin, Texas · Verano</span>
+        <ul>
+          <li><span class="chev">›</span> Competencia estilo olímpico en 12 deportes</li>
+          <li><span class="chev">›</span> Servicio comunitario y valores judíos</li>
+          <li><span class="chev">›</span> Atletas alojados con familias anfitrionas</li>
+          <li><span class="chev">›</span> Ceremonias de apertura y clausura inolvidables</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div class="bandtop" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- ======================= OUR TEAM ======================= -->
+<section class="section section--light" id="equipo">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow eyebrow--navy">Por qué apoyar a NMB</span>
+      <h2 class="section-title">Orgullo de North Miami Beach</h2>
+      <p class="sub">La delegación de North Miami Beach, que representa con orgullo al Michael-Ann Russell JCC, participa en los JCC Maccabi Games desde 1992. A lo largo de los años nuestros equipos han traído a casa medallas en soccer, baloncesto y natación —pero nuestras mayores victorias son el crecimiento personal, el orgullo judío y las amistades que perduran.</p>
+    </div>
+
+    <div class="feat">
+      <div class="card" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8 13l-2 8 6-3 6 3-2-8"/></svg></div>
+        <h3>Una tradición de medallas</h3>
+        <p>Más de tres décadas compitiendo con espíritu deportivo, representando a nuestra comunidad en cada cancha, campo y piscina.</p>
+      </div>
+      <div class="card" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>+40 atletas rumbo a Austin</h3>
+        <p>Este año buscamos enviar al menos 40 jóvenes de nuestra comunidad a representar a North Miami Beach en los Juegos.</p>
+      </div>
+      <div class="card" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 7 .5-5 4.5 1.5 7L12 16l-6.5 4L7 13 2 8.5 9 8z"/></svg></div>
+        <h3>$2,650 por atleta</h3>
+        <p>El costo por atleta cubre registro, transporte, alojamiento, uniformes y más. Muchas familias dependen del apoyo de la comunidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SPORTS ======================= -->
+<section class="section section--navy" id="deportes">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">Equipos 2027</span>
+      <h2 class="section-title">Nuestros deportes</h2>
+      <p class="sub">Elige la categoría de tu atleta. Todas las categorías por edad siguen el reglamento de los JCC Maccabi Games (12–16 años).</p>
+    </div>
+
+    <div class="sports">
+      <article class="sport" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7l2.5 1.8-1 3h-3l-1-3L12 7zM12 7V3M5.5 10.5l-3-1M18.5 10.5l3-1M8.5 17l-1.8 3M15.5 17l1.8 3"/></svg></div>
+        <h3>Soccer</h3>
+        <div class="cats"><span class="cat">Boys U15</span><span class="cat">Girls U15</span><span class="cat">Boys U17</span></div>
+      </article>
+      <article class="sport" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5 5c3 2.5 3 11.5 0 14M19 5c-3 2.5-3 11.5 0 14"/></svg></div>
+        <h3>Basketball</h3>
+        <div class="cats"><span class="cat">Boys U15</span><span class="cat">Girls U15</span><span class="cat">Boys U17</span><span class="cat">Girls U17</span></div>
+      </article>
+      <article class="sport" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M4 8c5 1 11 1 16 0M4 16c5-1 11-1 16 0"/></svg></div>
+        <h3>Volleyball</h3>
+        <div class="cats"><span class="cat">Girls U17</span></div>
+      </article>
+      <article class="sport" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M6 6c4 3 8 9 12 12M8 4.5C9 9 12 14 16 18.5"/></svg></div>
+        <h3>Tennis</h3>
+        <div class="cats"><span class="cat">U15</span><span class="cat">U17</span></div>
+      </article>
+      <article class="sport" data-reveal>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 17c2-1.5 3-1.5 5 0s3 1.5 5 0 3-1.5 5 0 3 1.5 5 0M2 21c2-1.5 3-1.5 5 0s3 1.5 5 0 3-1.5 5 0 3 1.5 5 0"/><circle cx="16" cy="7" r="2"/><path d="M6 13l6-3 3 2"/></svg></div>
+        <h3>Swimming</h3>
+        <div class="cats"><span class="cat">U15</span><span class="cat">U17</span></div>
+      </article>
+      <article class="sport" data-reveal style="display:flex; flex-direction:column; justify-content:center; background:linear-gradient(160deg,var(--burgundy),var(--burgundy-600)); border-color:var(--burgundy);">
+        <h3 style="font-size:1.15rem">¿Lista/o para competir?</h3>
+        <p style="color:#f3d2d9; font-size:.9rem; margin:.5rem 0 1rem">Asegura el lugar de tu atleta en la delegación.</p>
+        <a class="btn btn--navy btn--sm" href="#registro" style="align-self:flex-start">Registrarse <span class="arrow">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= GALLERY ======================= -->
+<section class="section section--navy2" id="galeria">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow">Momentos</span>
+      <h2 class="section-title">El año pasado en imágenes</h2>
+      <p class="sub">Un vistazo a la energía, el esfuerzo y el orgullo de nuestra delegación.</p>
+    </div>
+
+    <div class="gallery" data-reveal>
+      <div class="ph wide tall"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg></span></div>
+      <div class="ph"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+      <div class="ph"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+      <div class="ph"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+      <div class="ph tall"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+      <div class="ph wide"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg></span></div>
+    </div>
+
+    <div class="gallery__note" data-reveal>
+      <span class="chev" style="color:var(--burgundy-400); font-weight:900">›</span>
+      <div><b>Para el equipo NMB:</b> estos espacios son marcadores de posición. Reemplázalos con las fotos reales del año pasado (carpeta de Drive compartida). Recuerda: publica fotos de menores solo con el consentimiento familiar que requiere el MARJCC.</div>
+    </div>
+  </div>
+</section>
+
+<div class="bandtop" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- ======================= REGISTRATION ======================= -->
+<section class="section section--navy" id="registro">
+  <div class="wrap">
+    <div class="reg__grid">
+      <div class="reg__aside" data-reveal>
+        <span class="eyebrow">Registro de atletas</span>
+        <h2 class="section-title" style="margin-top:.7rem">Inscribe a tu atleta</h2>
+        <p class="sub">Completa la información para reservar el lugar de tu atleta en la delegación de North Miami Beach rumbo a Austin 2027.</p>
+
+        <ul class="reg__points">
+          <li><span class="n">1</span><div><b>Completa el formulario</b><span>Datos del participante, del padre/madre y el deporte.</span></div></li>
+          <li><span class="n">2</span><div><b>Te contactamos</b><span>Nuestro equipo confirma elegibilidad (edades 12–16) y próximos pasos.</span></div></li>
+          <li><span class="n">3</span><div><b>Rumbo a Austin</b><span>Uniformes, entrenamientos y detalles del viaje.</span></div></li>
+        </ul>
+
+        <div class="reg__official">
+          <p>¿Buscas el registro oficial o el pago? También puedes usar el portal de registro oficial.</p>
+          <a class="btn btn--ghost btn--sm" href="#" data-salesforce>Registro oficial <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- NOTE (dev): to send submissions to Salesforce Web-to-Lead,
+           set the form's action to the Salesforce endpoint + method="POST",
+           and map input names to your Salesforce field ids. See CONFIG in the script. -->
+      <div class="formcard" data-reveal>
+        <form id="regForm" novalidate>
+          <div class="legend">Participante</div>
+          <div class="fgrid">
+            <div class="field">
+              <label for="p_first">Participant First Name <span class="req">*</span></label>
+              <input id="p_first" name="participant_first_name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="p_last">Participant Last Name <span class="req">*</span></label>
+              <input id="p_last" name="participant_last_name" type="text" autocomplete="family-name" required>
+            </div>
+            <div class="field">
+              <label for="p_phone">Participant Phone Number <span class="req">*</span></label>
+              <input id="p_phone" name="participant_phone" type="tel" inputmode="tel" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="p_dob">Participant Date of Birth</label>
+              <input id="p_dob" name="participant_dob" type="date">
+              <span class="hint">Elegibilidad: 12–16 años durante los Juegos.</span>
+            </div>
+          </div>
+
+          <div class="legend">Padre / Madre / Tutor</div>
+          <div class="fgrid">
+            <div class="field">
+              <label for="g_first">Parent 1 First Name <span class="req">*</span></label>
+              <input id="g_first" name="parent1_first_name" type="text" required>
+            </div>
+            <div class="field">
+              <label for="g_last">Parent 1 Last Name <span class="req">*</span></label>
+              <input id="g_last" name="parent1_last_name" type="text" required>
+            </div>
+            <div class="field">
+              <label for="g_email">Parent 1 Email <span class="req">*</span></label>
+              <input id="g_email" name="parent1_email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="g_phone">Parent 1 Phone Number</label>
+              <input id="g_phone" name="parent1_phone" type="tel" inputmode="tel">
+            </div>
+          </div>
+
+          <div class="legend">Deporte</div>
+          <div class="fgrid">
+            <div class="field full">
+              <label for="sport">Sport <span class="req">*</span></label>
+              <select id="sport" name="sport" required>
+                <option value="" disabled selected>Selecciona un deporte…</option>
+                <optgroup label="Soccer">
+                  <option>Soccer Boys U15</option>
+                  <option>Soccer Girls U15</option>
+                  <option>Soccer Boys U17</option>
+                </optgroup>
+                <optgroup label="Basketball">
+                  <option>Basketball Boys U15</option>
+                  <option>Basketball Girls U15</option>
+                  <option>Basketball Boys U17</option>
+                  <option>Basketball Girls U17</option>
+                </optgroup>
+                <optgroup label="Volleyball">
+                  <option>Volleyball Girls U17</option>
+                </optgroup>
+                <optgroup label="Tennis">
+                  <option>Tennis U15</option>
+                  <option>Tennis U17</option>
+                </optgroup>
+                <optgroup label="Swimming">
+                  <option>Swimming U15</option>
+                  <option>Swimming U17</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <div class="submit-row">
+            <button class="btn" type="submit">Enviar registro <span class="arrow">→</span></button>
+            <span class="note">Al enviar, nuestro equipo te contactará para confirmar los detalles.</span>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess" aria-live="polite">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>¡Registro recibido!</h3>
+          <p>Gracias. Nuestro equipo se pondrá en contacto pronto. ¡Let's go NMB!</p>
+          <div class="recap" id="formRecap"></div>
+          <div style="margin-top:1.2rem"><button class="btn btn--outline-navy btn--sm" type="button" id="formReset">Registrar otro atleta</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SPONSORSHIP ======================= -->
+<section class="section section--light" id="sponsorship">
+  <div class="wrap">
+    <div class="section__head" data-reveal>
+      <span class="eyebrow eyebrow--navy">Sponsorship opportunities</span>
+      <h2 class="section-title">Patrocina al equipo</h2>
+      <p class="sub">Los Maccabi Games son una oportunidad única para conectar con miles de familias —no solo de North Miami Beach, sino de toda Norteamérica y más allá. Tu apoyo da visibilidad a tu marca y, sobre todo, envía a nuestros jóvenes a los Juegos. El 100% de tu contribución es utilizado por nuestra agencia en apoyo de nuestra misión.</p>
+    </div>
+
+    <div class="tier-grid">
+      <!-- Title -->
+      <article class="tier featured" data-reveal>
+        <span class="ribbon">Top tier</span>
+        <div class="tier__top">
+          <div class="name">Title Sponsor</div>
+          <div class="price">$12,000</div>
+        </div>
+        <ul class="tier__body">
+          <li><span class="chk">✓</span> Reconocimiento como “Title Sponsor” en todas las comunicaciones y materiales del evento (blasts, página, folleto, programa, redes y pantalla de TV)</li>
+          <li><span class="chk">✓</span> Logo en la manga de todas las t-shirts del equipo NMB, el duffel bag y el warm-up</li>
+          <li><span class="chk">✓</span> (2) banners 5'×7' en el campus por seis meses</li>
+          <li><span class="chk">✓</span> Material promocional en el swag bag del evento</li>
+          <li><a class="btn btn--sm" href="#donar" data-donate>Ser Title Sponsor</a></li>
+        </ul>
+      </article>
+
+      <!-- Signature -->
+      <article class="tier" data-reveal>
+        <div class="tier__top">
+          <div class="name">Signature Sponsor</div>
+          <div class="price">$8,000</div>
+        </div>
+        <ul class="tier__body">
+          <li><span class="chk">✓</span> Logo corporativo en todas las t-shirts del equipo NMB para todas las competencias</li>
+          <li><span class="chk">✓</span> Logo en el duffel bag y el warm-up del equipo</li>
+          <li><span class="chk">✓</span> (2) banners 5'×7' en el campus por seis meses</li>
+          <li><span class="chk">✓</span> Material promocional en el swag bag del evento</li>
+          <li><a class="btn btn--outline-navy btn--sm" href="#donar" data-donate>Elegir nivel</a></li>
+        </ul>
+      </article>
+
+      <!-- Maccabi -->
+      <article class="tier" data-reveal>
+        <div class="tier__top">
+          <div class="name">Maccabi Sponsor</div>
+          <div class="price">$5,000</div>
+        </div>
+        <ul class="tier__body">
+          <li><span class="chk">✓</span> Logo corporativo en la espalda de todas las practice t-shirts del equipo</li>
+          <li><span class="chk">✓</span> Logo en el duffel bag y el warm-up del equipo</li>
+          <li><span class="chk">✓</span> (2) banners 5'×7' en el campus por seis meses</li>
+          <li><span class="chk">✓</span> Material promocional en el swag bag del evento</li>
+          <li><a class="btn btn--outline-navy btn--sm" href="#donar" data-donate>Elegir nivel</a></li>
+        </ul>
+      </article>
+
+      <!-- Platinum -->
+      <article class="tier" data-reveal>
+        <div class="tier__top">
+          <div class="name">Platinum Sponsor</div>
+          <div class="price">$2,500</div>
+        </div>
+        <ul class="tier__body">
+          <li><span class="chk">✓</span> Logo corporativo en la espalda de todas las practice t-shirts</li>
+          <li><span class="chk">✓</span> Logo corporativo en el duffel bag del equipo</li>
+          <li><span class="chk">✓</span> (1) banner 5'×7' en el campus por seis meses</li>
+          <li><span class="chk">✓</span> Material promocional en el swag bag del evento</li>
+          <li><a class="btn btn--outline-navy btn--sm" href="#donar" data-donate>Elegir nivel</a></li>
+        </ul>
+      </article>
+
+      <!-- Athlete -->
+      <article class="tier" data-reveal>
+        <div class="tier__top">
+          <div class="name">Athlete Sponsor</div>
+          <div class="price">$1,500</div>
+        </div>
+        <ul class="tier__body">
+          <li><span class="chk">✓</span> Logo corporativo en la espalda de todas las practice t-shirts</li>
+          <li><span class="chk">✓</span> (1) banner 5'×7' en el campus por seis meses</li>
+          <li><span class="chk">✓</span> Material promocional en el swag bag del evento</li>
+          <li><a class="btn btn--outline-navy btn--sm" href="#donar" data-donate>Elegir nivel</a></li>
+        </ul>
+      </article>
+
+      <!-- Silver -->
+      <article class="tier" data-reveal>
+        <div class="tier__top">
+          <div class="name">Silver Sponsor</div>
+          <div class="price">$500</div>
+        </div>
+        <ul class="tier__body">
+          <li><span class="chk">✓</span> Logo corporativo en la espalda de todas las practice t-shirts del equipo</li>
+          <li><a class="btn btn--outline-navy btn--sm" href="#donar" data-donate>Elegir nivel</a></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="spon-cta" data-reveal>
+      <div class="t">¿Hablamos de patrocinio? Escribe a <b>Roxana Markus</b> ·
+        <span style="color:var(--muted); font-weight:600" data-email="roxanam@marjcc.org">roxanam@marjcc.org</span>
+        <button class="copybtn" data-copy="roxanam@marjcc.org" style="color:var(--ink); background:var(--cloud-2); border-color:var(--line-on-light)">Copiar</button>
+      </div>
+      <div class="acts">
+        <a class="btn" href="#donar" data-donate>Donar ahora</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= DONATE ======================= -->
+<section class="donate" id="donar">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#f3d2d9">Haz posible el viaje</span>
+    <h2 class="display" style="margin-top:.6rem">Envía un atleta a Austin</h2>
+    <p>Cada contribución ayuda a cubrir registro, transporte, alojamiento y uniformes. Con <strong style="color:#fff">$2,650</strong> patrocinas a un atleta completo —pero cada dólar cuenta.</p>
+    <div class="acts">
+      <a class="btn btn--navy" href="#" data-redpodium>Donar ahora <span class="arrow">→</span></a>
+      <a class="btn btn--ghost" href="#sponsorship">Ver niveles de sponsorship</a>
+    </div>
+    <p style="margin-top:1.4rem; font-size:.82rem; color:#f0cfd6" data-redpodium-note hidden>El enlace de donación (RedPodium) se activará aquí en cuanto esté disponible.</p>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <svg class="crest" viewBox="0 0 200 210" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round">
+            <polygon points="100,15 26.4,142.5 173.6,142.5"/>
+            <polygon points="100,195 26.4,57.5 173.6,57.5"/>
+          </g>
+          <text x="100" y="118" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-style="italic" font-size="52" fill="currentColor">NMB</text>
+        </svg>
+        <div class="footer__tag"><span class="chev">›</span> Let's go NMB!</div>
+        <p style="color:#aeb9cc; margin-top:.6rem; font-size:.92rem; max-width:34ch">Delegación de North Miami Beach · Michael-Ann Russell JCC · JCC National Maccabi Games 2027.</p>
+        <div style="margin-top:1rem"><span class="footer__hash">#NMBtoAustin</span></div>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <div class="contact-row">
+          <span class="role">Registro y programa</span>
+          <span class="who">Tomas Glasermann</span>
+          <span class="copyline"><span style="color:#dce2ee">tomasg@marjcc.org</span><button class="copybtn" data-copy="tomasg@marjcc.org">Copiar</button></span>
+        </div>
+        <div class="contact-row">
+          <span class="role">Sponsorship</span>
+          <span class="who">Roxana Markus · Chief Development Officer</span>
+          <span class="copyline"><span style="color:#dce2ee">roxanam@marjcc.org</span><button class="copybtn" data-copy="roxanam@marjcc.org">Copiar</button></span>
+        </div>
+      </div>
+
+      <div>
+        <h4>Ubicación</h4>
+        <address class="footer__addr">
+          Michael-Ann Russell JCC<br>
+          Sanford L. Ziff Campus<br>
+          18900 NE 25th Avenue<br>
+          North Miami Beach, FL 33180
+        </address>
+        <div style="margin-top:1.2rem; display:flex; gap:.6rem; flex-wrap:wrap">
+          <a class="btn btn--ghost btn--sm" href="#registro">Registrarse</a>
+          <a class="btn btn--sm" href="#donar" data-donate>Donar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span style="font-size:.8rem; color:#8f9bb3">© <span id="yr"></span> Michael-Ann Russell JCC · North Miami Beach</span>
+      <p class="footer__legal">Nuestro número de registro estatal es SC-O1998. Una copia de la información oficial de registro y financiera puede obtenerse en la División de Servicios al Consumidor llamando al 1-800-HELP-FLA (dentro del estado). El registro no implica respaldo, aprobación o recomendación. “JCC Maccabi Games®” es una marca registrada de JCC Association; su uso sigue las guías oficiales.</p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script>
+/* ============================================================
+   CONFIG — EDITA ESTOS DOS ENLACES cuando los tengas
+   ============================================================ */
+const CONFIG = {
+  // Portal de registro oficial (Salesforce). Déjalo como "#" hasta tener el link.
+  salesforceRegistrationUrl: "#",
+  // Formulario de donación (RedPodium). Déjalo como "#" hasta tener el link.
+  redpodiumDonationUrl: "#",
+  // Contactos (solo informativos)
+  registrationContactEmail: "tomasg@marjcc.org",
+  sponsorContactEmail: "roxanam@marjcc.org",
+};
+
+(function(){
+  "use strict";
+  document.documentElement.classList.add('js');
+  var yr = document.getElementById('yr'); if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---- Nav: scrolled state + mobile toggle + active link ---- */
+  var nav = document.getElementById('nav');
+  var navlinks = document.getElementById('navlinks');
+  var toggle = document.getElementById('navToggle');
+  function onScroll(){ if (nav) nav.classList.toggle('scrolled', window.scrollY > 24); }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  if (toggle && navlinks){
+    toggle.addEventListener('click', function(){
+      var open = navlinks.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navlinks.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ navlinks.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+    });
+  }
+
+  /* ---- Active link on scroll ---- */
+  var sections = ['juegos','equipo','deportes','galeria','registro','sponsorship'].map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var linkFor = {};
+  document.querySelectorAll('.nav__links a.link').forEach(function(a){ var h=a.getAttribute('href'); if(h) linkFor[h.slice(1)] = a; });
+  if ('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          Object.values(linkFor).forEach(function(a){ a.classList.remove('active'); });
+          var a = linkFor[e.target.id]; if (a) a.classList.add('active');
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+
+  /* ---- Reveal on scroll (fail-safe: reveal all after 1.4s) ---- */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  function showAll(){ reveals.forEach(function(el){ el.classList.add('in'); }); }
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var ro = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    reveals.forEach(function(el){ ro.observe(el); });
+    setTimeout(showAll, 1400);
+  } else { showAll(); }
+
+  /* ---- Count-up stats ---- */
+  function countUp(el){
+    var target = parseInt(el.getAttribute('data-count'),10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (isNaN(target)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent = target + suffix; return; }
+    var start = 0, dur = 1100, t0 = null;
+    function step(ts){
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0)/dur, 1);
+      var eased = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(start + (target-start)*eased) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var nums = document.querySelectorAll('.stat .num[data-count]');
+  if ('IntersectionObserver' in window){
+    var no = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(e){ if (e.isIntersecting){ countUp(e.target); obs.unobserve(e.target); } });
+    }, {threshold:0.5});
+    nums.forEach(function(n){ no.observe(n); });
+  } else { nums.forEach(countUp); }
+
+  /* ---- Wire external links (Salesforce + RedPodium) ---- */
+  function wire(selector, url, noteSel){
+    var ready = url && url !== '#';
+    document.querySelectorAll(selector).forEach(function(a){
+      if (ready){
+        a.setAttribute('href', url);
+        a.setAttribute('target','_blank');
+        a.setAttribute('rel','noopener');
+      } else {
+        a.addEventListener('click', function(ev){
+          // No link yet: fall back gracefully
+          if (noteSel){
+            ev.preventDefault();
+            var note = document.querySelector(noteSel);
+            if (note){ note.hidden = false; note.scrollIntoView({behavior:'smooth', block:'center'}); }
+          }
+        });
+      }
+    });
+  }
+  wire('[data-salesforce]', CONFIG.salesforceRegistrationUrl, null);
+  wire('[data-redpodium]', CONFIG.redpodiumDonationUrl, '[data-redpodium-note]');
+  // "Donar" buttons that point to the #donar section always scroll there; if RedPodium is set,
+  // the primary button inside #donar carries the real link.
+
+  /* ---- Copy-to-clipboard for emails ---- */
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var val = btn.getAttribute('data-copy') || '';
+      var done = function(){ var old = btn.textContent; btn.textContent='¡Copiado!'; btn.classList.add('copied');
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('copied'); }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(val).then(done).catch(function(){ fallbackCopy(val); done(); });
+      } else { fallbackCopy(val); done(); }
+    });
+  });
+  function fallbackCopy(text){
+    try{ var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    }catch(e){}
+  }
+
+  /* ---- Registration form ---- */
+  var form = document.getElementById('regForm');
+  var success = document.getElementById('formSuccess');
+  var recap = document.getElementById('formRecap');
+  if (form){
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      if (!form.checkValidity()){ form.reportValidity(); return; }
+      var data = {
+        'Atleta': (form.participant_first_name.value + ' ' + form.participant_last_name.value).trim(),
+        'Teléfono': form.participant_phone.value,
+        'Deporte': form.sport.value,
+        'Padre/Madre': (form.parent1_first_name.value + ' ' + form.parent1_last_name.value).trim(),
+        'Email': form.parent1_email.value
+      };
+      /* TODO (producción): enviar `data` a Salesforce (Web-to-Lead) o a tu endpoint.
+         En este preview mostramos la confirmación directamente. */
+      if (recap){
+        recap.innerHTML = Object.keys(data).map(function(k){
+          return '<div><strong>'+k+':</strong> '+ (data[k] ? escapeHtml(data[k]) : '—') +'</div>';
+        }).join('');
+      }
+      form.hidden = true;
+      if (success) success.classList.add('show');
+      if (success) success.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  }
+  var resetBtn = document.getElementById('formReset');
+  if (resetBtn){
+    resetBtn.addEventListener('click', function(){
+      form.reset(); form.hidden = false; if (success) success.classList.remove('show');
+      form.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  }
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+})();
+</script>
+
+<style>
+  /* Star textures as CSS vars (SVG data URIs) used by ::before layers */
+  :root{
+    --stars-white:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='104'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='0.14'%20stroke-width='1.4'%20stroke-linejoin='round'%3E%3Cpolygon%20points='60,16 25,76 95,76'/%3E%3Cpolygon%20points='60,88 25,28 95,28'/%3E%3C/g%3E%3C/svg%3E");
+    --stars-burg:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='150'%20height='130'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='0.12'%20stroke-width='1.5'%20stroke-linejoin='round'%3E%3Cpolygon%20points='75,20 33,96 117,96'/%3E%3Cpolygon%20points='75,110 33,34 117,34'/%3E%3C/g%3E%3C/svg%3E");
+  }
+</style>
