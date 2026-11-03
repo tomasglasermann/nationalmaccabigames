@@ -410,6 +410,14 @@
     display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center; }
   .footer__legal{ font-size:.72rem; color:#7f8aa1; max-width:70ch; line-height:1.6; }
   .footer__hash{ font-weight:900; font-style:italic; text-transform:uppercase; color:#fff; letter-spacing:.02em; }
+  .partners{ margin-top:2.4rem; padding-top:1.8rem; border-top:1px solid var(--line-on-navy); display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.8rem; }
+  .partners__label{ font-weight:700; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:#8f9bb3; }
+  .partners__logos{ display:flex; align-items:center; gap:1.2rem 1.8rem; flex-wrap:wrap; }
+  .partners__logo{ width:auto; opacity:.9; }
+  .partners__logo--marjcc{ height:52px; }
+  .partners__logo--jcc{ height:38px; }
+  .partners__sep{ width:1px; height:32px; background:var(--line-on-navy); }
+  @media (max-width:560px){ .partners__sep{ display:none; } }
   @media (max-width:760px){ .footer__top{ grid-template-columns:1fr; gap:1.6rem; } }
 
   /* ---- Reveal on scroll (visible by default; JS enhances) ---- */
@@ -927,6 +935,15 @@
           <a class="btn btn--ghost btn--sm" href="#registro">Interest form</a>
           <a class="btn btn--sm" href="#donar" data-donate>Donate</a>
         </div>
+      </div>
+    </div>
+
+    <div class="partners">
+      <span class="partners__label">Presented by</span>
+      <div class="partners__logos">
+        <img class="partners__logo partners__logo--marjcc" src="assets/marjcc-logo-white.webp" alt="Michael-Ann Russell JCC (MARJCC)">
+        <span class="partners__sep" aria-hidden="true"></span>
+        <img class="partners__logo partners__logo--jcc" src="assets/jccmaccabi-logo-white.webp" alt="JCC Maccabi Games · Access">
       </div>
     </div>
 
