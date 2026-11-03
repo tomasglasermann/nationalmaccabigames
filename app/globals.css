@@ -88,5 +88,31 @@ td.wrap, th.wrap{ white-space:normal; }
 
 /* communications */
 .comm-form{ display:grid; gap:12px; padding:18px; max-width:680px; }
-.comm-form textarea{ border:1.5px solid var(--line); border-radius:10px; padding:11px 12px; font-size:.92rem; min-height:160px; resize:vertical; }
+.comm-form textarea{ border:1.5px solid var(--line); border-radius:10px; padding:11px 12px; font-size:.92rem; min-height:180px; resize:vertical; font-family:inherit; }
 .comm-form input[type=text]{ border:1.5px solid var(--line); border-radius:10px; padding:11px 12px; font-size:.92rem; }
+.comm-row{ display:flex; gap:16px; flex-wrap:wrap; align-items:flex-end; }
+.comm-row label{ display:flex; flex-direction:column; gap:5px; }
+.comm-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.comm-form code{ background:rgba(10,35,66,.08); padding:1px 6px; border-radius:5px; font-size:.85em; }
+
+/* uniforms add form */
+.uni-form{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; padding:18px; border-bottom:1px solid var(--line); }
+.uni-form input{ border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; font-size:.9rem; }
+
+/* responsive helper */
+@media (max-width:640px){ .hide-sm{ display:none; } }
+
+/* detail modal */
+.modal-overlay{ position:fixed; inset:0; background:rgba(6,21,39,.55); display:grid; place-items:center; padding:18px; z-index:50; }
+.modal{ width:100%; max-width:520px; background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 40px 80px -30px rgba(0,0,0,.6); max-height:90vh; display:flex; flex-direction:column; }
+.modal-head{ display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid var(--line); }
+.modal-head h3{ margin:0; font-weight:900; font-style:italic; text-transform:uppercase; font-size:1.1rem; }
+.modal-x{ border:0; background:transparent; font-size:1.6rem; line-height:1; color:var(--muted); }
+.modal-body{ padding:16px 20px; overflow-y:auto; display:grid; gap:12px; }
+.modal-foot{ display:flex; justify-content:flex-end; gap:10px; padding:14px 20px; border-top:1px solid var(--line); }
+.kv{ display:grid; grid-template-columns:140px 1fr; gap:10px; align-items:start; }
+.kv-k{ font-size:.68rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding-top:3px; }
+.kv-v{ font-size:.92rem; }
+.kv-notes{ grid-template-columns:1fr; }
+.kv-notes textarea{ border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; font-size:.9rem; min-height:90px; resize:vertical; font-family:inherit; }
+@media (max-width:480px){ .kv{ grid-template-columns:1fr; gap:2px; } }
