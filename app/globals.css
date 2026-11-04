@@ -28,7 +28,7 @@ input,select,textarea{ font-family:inherit; }
 .auth-err{ background:#fde8ec; color:#8a1230; border:1px solid #f3c2cd; padding:10px 12px; border-radius:10px; font-size:.84rem; margin-bottom:12px; }
 
 /* ---------- Admin shell ---------- */
-.admin{ min-height:100vh; }
+.admin{ display:flex; min-height:100vh; align-items:stretch; }
 .topbar{ background:var(--navy); color:#fff; padding:0 20px; display:flex; align-items:center; justify-content:space-between; height:60px; }
 .topbar .brand{ font-weight:900; font-style:italic; text-transform:uppercase; letter-spacing:.02em; display:flex; align-items:center; gap:10px; }
 .topbar .brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--burgundy-400); }
@@ -57,6 +57,31 @@ input,select,textarea{ font-family:inherit; }
 .tabs--side{ flex-direction:column; gap:4px; margin-bottom:0; position:sticky; top:16px; }
 .tabs--side button{ justify-content:flex-start; text-align:left; width:100%; }
 @media (max-width:820px){ .admin-main{ grid-template-columns:1fr; } .tabs--side{ flex-direction:row; order:-1; margin-bottom:16px; } }
+
+/* ===== Left sidebar admin layout ===== */
+.sidebar{ width:244px; flex:none; background:var(--navy); color:#fff; display:flex; flex-direction:column;
+  padding:16px 14px; gap:6px; position:sticky; top:0; align-self:flex-start; height:100vh; }
+.sidebar__brand{ display:flex; align-items:center; gap:10px; padding:6px 10px 14px; margin-bottom:6px; border-bottom:1px solid rgba(255,255,255,.1); }
+.sidebar__brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--burgundy-400); flex:none; }
+.sidebar__brand b{ font-weight:900; font-style:italic; text-transform:uppercase; letter-spacing:.02em; font-size:1.05rem; }
+.snav{ display:flex; flex-direction:column; gap:4px; flex:1; }
+.snav button{ display:flex; align-items:center; gap:11px; width:100%; text-align:left; border:0; background:transparent;
+  color:#cdd5e3; font-weight:700; font-size:.88rem; padding:10px 12px; border-radius:10px; cursor:pointer;
+  transition:background .15s ease, color .15s ease; }
+.snav button:hover{ background:rgba(255,255,255,.08); color:#fff; }
+.snav button.active{ background:var(--burgundy); color:#fff; }
+.snav button svg{ width:19px; height:19px; flex:none; }
+.sidebar__foot{ border-top:1px solid rgba(255,255,255,.1); padding-top:12px; margin-top:6px; }
+.sidebar__user{ font-size:.74rem; color:#9fb0c9; margin-bottom:8px; padding:0 4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.main{ flex:1; min-width:0; padding:26px clamp(16px,3vw,34px); }
+.main__title{ font-weight:900; font-style:italic; text-transform:uppercase; font-size:1.7rem; color:var(--ink); margin:0 0 20px; }
+@media (max-width:820px){
+  .admin{ flex-direction:column; }
+  .sidebar{ width:100%; height:auto; position:static; }
+  .snav{ flex-direction:row; flex-wrap:wrap; }
+  .snav button{ width:auto; }
+  .main{ padding:18px 16px; }
+}
 
 .panel{ background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; }
 .panel-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap; }

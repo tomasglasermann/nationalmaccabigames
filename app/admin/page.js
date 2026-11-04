@@ -9,6 +9,13 @@ const TABS = [
   { id: 'communications', label: 'Communications' },
 ];
 
+const TAB_ICONS = {
+  registrations: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>),
+  donations: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>),
+  uniforms: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 3l5 3-2.5 4.5L17 9.5V21H7V9.5l-1.5 1L3 6l5-3a4 4 0 0 0 8 0z"/></svg>),
+  communications: (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>),
+};
+
 const REG_STATUSES = ['new', 'contacted', 'confirmed', 'declined'];
 const UNI_STATUSES = ['needed', 'ordered', 'received'];
 const SPORTS = [
@@ -71,26 +78,34 @@ export default function AdminPage() {
 
   return (
     <div className="admin">
-      <header className="topbar">
-        <div className="brand"><span className="dot" /> NMB Admin</div>
-        <div className="who">
-          <span className="hide-sm">tomasg@marjcc.org</span>
+      <aside className="sidebar">
+        <div className="sidebar__brand"><span className="dot" /><b>NMB Admin</b></div>
+        <nav className="snav">
+          {TABS.map((t) => (
+            <button key={t.id} className={tab === t.id ? 'active' : ''} onClick={() => setTab(t.id)}>
+              {TAB_ICONS[t.id]}<span>{t.label}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="sidebar__foot">
+          <div className="sidebar__user" title="tomasg@marjcc.org">tomasg@marjcc.org</div>
           <button className="logout" onClick={logout}>Sign out</button>
         </div>
-      </header>
+      </aside>
 
-      <div className="container">
+      <main className="main">
+        <h1 className="main__title">{(TABS.find((t) => t.id === tab) || {}).label || 'Dashboard'}</h1>
+
         {!configured ? (
           <div className="notice warn">
             <strong>Database not connected yet.</strong> Add your Supabase keys in Vercel
-            (SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY) and run the schema. Until then the tabs are empty.
+            (SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY) and run the schema.
           </div>
         ) : null}
-
         {configured && dbError ? (
           <div className="notice warn">
-            <strong>Database error:</strong> {dbError}. Check that the schema SQL was run and that
-            SUPABASE_SERVICE_ROLE_KEY is the <em>service_role</em> key (not the anon key).
+            <strong>Database error:</strong> {dbError}. Check the schema and that
+            SUPABASE_SERVICE_ROLE_KEY is the service_role key.
           </div>
         ) : null}
 
@@ -101,27 +116,18 @@ export default function AdminPage() {
           <div className="tile"><div className="k">Uniform items</div><div className="v">{stats.uniforms ?? 0}</div></div>
         </div>
 
-        <div className="admin-main">
-          <div className="admin-panel">
-            {loading ? (
-              <div className="panel"><div className="loading">Loading…</div></div>
-            ) : tab === 'registrations' ? (
-              <Registrations rows={regs} setRows={setRegs} />
-            ) : tab === 'donations' ? (
-              <Donations rows={dons} total={donTotal} />
-            ) : tab === 'uniforms' ? (
-              <Uniforms rows={unis} setRows={setUnis} reload={load} />
-            ) : (
-              <Communications regs={regs} />
-            )}
-          </div>
-          <nav className="tabs tabs--side">
-            {TABS.map((t) => (
-              <button key={t.id} className={tab === t.id ? 'active' : ''} onClick={() => setTab(t.id)}>{t.label}</button>
-            ))}
-          </nav>
-        </div>
-      </div>
+        {loading ? (
+          <div className="panel"><div className="loading">Loading…</div></div>
+        ) : tab === 'registrations' ? (
+          <Registrations rows={regs} setRows={setRegs} />
+        ) : tab === 'donations' ? (
+          <Donations rows={dons} total={donTotal} />
+        ) : tab === 'uniforms' ? (
+          <Uniforms rows={unis} setRows={setUnis} reload={load} />
+        ) : (
+          <Communications regs={regs} />
+        )}
+      </main>
     </div>
   );
 }
