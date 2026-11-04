@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Serve the static landing page (public/landing.html) at the site root,
-  // keeping the URL as "/". All its inline CSS/JS run normally.
+  // Serve the static multi-page site from /public. Clean root URL -> home.html;
+  // other pages are served at their own .html paths.
   async rewrites() {
-    return [{ source: '/', destination: '/landing.html' }];
+    return [{ source: '/', destination: '/home.html' }];
   },
 };
 

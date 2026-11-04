@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Register · NMB</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#0A2342">
+<link rel="icon" type="image/png" href="/favicon-256.png">
+<link rel="apple-touch-icon" href="/favicon-256.png">
+<link rel="stylesheet" href="/styles.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NMB · North Miami Beach Maccabi">
+<meta property="og:title" content="Let's go NMB! · Road to Austin 2027">
+<meta property="og:description" content="The North Miami Beach (MARJCC) delegation on the road to the JCC Maccabi Games 2027 in Austin — July 25–30.">
+<meta property="og:url" content="https://nmbteam.vercel.app/">
+<meta property="og:image" content="https://nmbteam.vercel.app/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nmbteam.vercel.app/assets/og.png">
+<meta name="description" content="Register your athlete's interest for the NMB delegation to the JCC Maccabi Games 2027.">
+</head>
+<body>
+<div id="preloader" aria-hidden="true">
+  <span class="curtain top"></span>
+  <span class="curtain bottom"></span>
+  <img class="pl-logo" src="/assets/nmb-logo-white.webp" alt="">
+</div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__bar">
+    <a class="brandmark" href="/" aria-label="NMB — home">
+      <img class="crest crest--jcc" src="/assets/jccmaccabi-logo-white.webp" alt="JCC Maccabi Games · Access">
+      <span class="brandmark__sep" aria-hidden="true"></span>
+      <img class="crest crest--marjcc" src="/assets/marjcc-logo-white.webp" alt="Michael-Ann Russell JCC (MARJCC)">
+    </a>
+    <nav class="nav__links" id="navlinks" aria-label="Main navigation">
+      <a class="link" href="/">Home</a>
+      <a class="link" href="/the-games.html">The Games</a>
+      <a class="link" href="/sports.html">Sports</a>
+      <a class="link" href="/gallery.html">Gallery</a>
+      <a class="link active" href="/register.html">Register</a>
+      <a class="link" href="/sponsor.html">Sponsor</a>
+      <a class="link" href="/faq.html">FAQ</a>
+      <a class="btn btn--sm" href="/register.html">I'm interested</a>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--sm" href="/sponsor.html">Sponsor</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="scrollbar" id="scrollbar" aria-hidden="true"></div>
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow">Athlete interest</span>
+    <h1>Register</h1>
+    <p>Tell us your athlete wants to represent North Miami Beach in Austin 2027.</p>
+  </div>
+</section>
+
+<section class="section section--navy" id="registro">
+  <div class="wrap">
+    <div class="reg__grid">
+      <div class="reg__aside" data-reveal>
+        <span class="eyebrow">Interest form</span>
+        <h2 class="section-title" style="margin-top:.7rem">Register your interest</h2>
+        <p class="sub">This quick interest form helps us plan the North Miami Beach delegation for Austin 2027. It's not the official registration — it just lets us know your athlete wants to take part, and we'll keep you posted on every next step.</p>
+
+        <ul class="reg__points">
+          <li><span class="n">1</span><div><b>Fill out the interest form</b><span>Participant details, parent/guardian details, and the sport.</span></div></li>
+          <li><span class="n">2</span><div><b>We'll reach out</b><span>Our team confirms eligibility (ages 13–17) and next steps.</span></div></li>
+          <li><span class="n">3</span><div><b>Road to Austin</b><span>Uniforms, practices, and travel details.</span></div></li>
+        </ul>
+
+        <div class="reg__official">
+          <p>Official registration &amp; payment open later. For now, filling out the interest form above is what matters — it lets us hold your athlete's spot and plan ahead.</p>
+          <span class="btn btn--ghost btn--sm is-soon" aria-disabled="true">Official registration · Coming soon</span>
+        </div>
+      </div>
+
+      <!-- NOTE (dev): to send submissions to Salesforce Web-to-Lead,
+           set the form's action to the Salesforce endpoint + method="POST",
+           and map input names to your Salesforce field ids. See CONFIG in the script. -->
+      <div class="formcard" data-reveal>
+        <form id="regForm" novalidate>
+          <div class="legend">Participant</div>
+          <div class="fgrid">
+            <div class="field">
+              <label for="p_first">Participant First Name <span class="req">*</span></label>
+              <input id="p_first" name="participant_first_name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="p_last">Participant Last Name <span class="req">*</span></label>
+              <input id="p_last" name="participant_last_name" type="text" autocomplete="family-name" required>
+            </div>
+            <div class="field">
+              <label for="p_phone">Participant Phone Number <span class="req">*</span></label>
+              <input id="p_phone" name="participant_phone" type="tel" inputmode="tel" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="p_dob">Participant Date of Birth</label>
+              <input id="p_dob" name="participant_dob" type="date">
+              <span class="hint">Eligibility: ages 13–17 during the Games.</span>
+            </div>
+          </div>
+
+          <div class="legend">Parent / Guardian</div>
+          <div class="fgrid">
+            <div class="field">
+              <label for="g_first">Parent 1 First Name <span class="req">*</span></label>
+              <input id="g_first" name="parent1_first_name" type="text" required>
+            </div>
+            <div class="field">
+              <label for="g_last">Parent 1 Last Name <span class="req">*</span></label>
+              <input id="g_last" name="parent1_last_name" type="text" required>
+            </div>
+            <div class="field">
+              <label for="g_email">Parent 1 Email <span class="req">*</span></label>
+              <input id="g_email" name="parent1_email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="g_phone">Parent 1 Phone Number</label>
+              <input id="g_phone" name="parent1_phone" type="tel" inputmode="tel">
+            </div>
+          </div>
+
+          <div class="legend">Sport</div>
+          <div class="fgrid">
+            <div class="field full">
+              <label for="sport">Sport <span class="req">*</span></label>
+              <select id="sport" name="sport" required>
+                <option value="" disabled selected>Select a sport…</option>
+                <optgroup label="Soccer">
+                  <option>Soccer Boys U15</option>
+                  <option>Soccer Girls U15</option>
+                  <option>Soccer Boys U17</option>
+                </optgroup>
+                <optgroup label="Basketball">
+                  <option>Basketball Boys U15</option>
+                  <option>Basketball Girls U15</option>
+                  <option>Basketball Boys U17</option>
+                  <option>Basketball Girls U17</option>
+                </optgroup>
+                <optgroup label="Tennis">
+                  <option>Tennis U15</option>
+                  <option>Tennis U17</option>
+                </optgroup>
+                <optgroup label="Swimming">
+                  <option>Swimming U15</option>
+                  <option>Swimming U17</option>
+                </optgroup>
+                <optgroup label="Football">
+                  <option>Football U17</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <div class="submit-row">
+            <button class="btn" type="submit">Submit interest form <span class="arrow">→</span></button>
+            <span class="note">This is an interest form, not the official registration — it just tells us your athlete wants in. Our team will follow up.</span>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess" aria-live="polite">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>You're on the list!</h3>
+          <p>Thanks for your interest! Our team will be in touch with next steps. Let's go NMB!</p>
+          <div class="recap" id="formRecap"></div>
+          <div style="margin-top:1.2rem"><button class="btn btn--outline-navy btn--sm" type="button" id="formReset">Add another athlete</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <img class="crest" src="/assets/nmb-logo-white.webp" alt="NMB — MARJCC North Miami Beach">
+
+        <div class="footer__tag"><span class="chev">›</span> Let's go NMB!</div>
+        <p style="color:#aeb9cc; margin-top:.6rem; font-size:.92rem; max-width:34ch">North Miami Beach delegation · Michael-Ann Russell JCC · JCC National Maccabi Games 2027.</p>
+        <div style="margin-top:1rem"><span class="footer__hash">#NMBtoAustin</span></div>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <div class="contact-row">
+          <span class="role">Head of Delegation</span>
+          <span class="who">Tomas Glasermann</span>
+          <span class="copyline"><span style="color:#dce2ee">tomasg@marjcc.org</span><button class="copybtn" data-copy="tomasg@marjcc.org">Copy</button></span>
+        </div>
+        <div class="contact-row">
+          <span class="role">Sponsorship</span>
+          <span class="who">Roxana Markus · Chief Development Officer</span>
+          <span class="copyline"><span style="color:#dce2ee">roxanam@marjcc.org</span><button class="copybtn" data-copy="roxanam@marjcc.org">Copy</button></span>
+        </div>
+      </div>
+
+      <div>
+        <h4>Location</h4>
+        <address class="footer__addr">
+          Michael-Ann Russell JCC<br>
+          Sanford L. Ziff Campus<br>
+          18900 NE 25th Avenue<br>
+          North Miami Beach, FL 33180
+        </address>
+        <div style="margin-top:1.2rem; display:flex; gap:.6rem; flex-wrap:wrap">
+          <a class="btn btn--ghost btn--sm" href="/register.html">Interest form</a>
+          <a class="btn btn--sm" href="/sponsor.html" data-donate>Sponsor</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="partners">
+      <span class="partners__label">Presented by</span>
+      <div class="partners__logos">
+        <img class="partners__logo partners__logo--marjcc" src="/assets/marjcc-logo-white.webp" alt="Michael-Ann Russell JCC (MARJCC)">
+        <span class="partners__sep" aria-hidden="true"></span>
+        <img class="partners__logo partners__logo--jcc" src="/assets/jccmaccabi-logo-white.webp" alt="JCC Maccabi Games · Access">
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span style="font-size:.8rem; color:#8f9bb3">© <span id="yr"></span> Michael-Ann Russell JCC · North Miami Beach</span>
+      <p class="footer__legal">Our state registration number is SC-O1998. A copy of the official registration and financial information may be obtained from the Division of Consumer Services by calling toll-free, within the state, 1-800-HELP-FLA. Registration does not imply endorsement, approval, or recommendation. “JCC Maccabi Games®” is a registered trademark of JCC Association; use follows their official guidelines.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
