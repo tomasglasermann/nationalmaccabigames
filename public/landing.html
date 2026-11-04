@@ -216,19 +216,19 @@
   .hero__lede{ margin-top:1.5rem; max-width:48ch; color:#d6ddea; font-size:1.02rem; }
   .hero__actions{ margin-top:2rem; display:flex; flex-wrap:wrap; gap:.9rem; }
 
-  .hero__crestwrap{ position:relative; display:flex; justify-content:center; align-items:center; }
-  .hero__crest-stage{ position:relative; width:min(360px,82%); transform-style:preserve-3d; will-change:transform; animation:crestFloat 7s ease-in-out infinite; }
-  .hero__crest{ display:block; width:100%; position:relative; z-index:1; filter:drop-shadow(0 24px 40px rgba(0,0,0,.45)); }
-  .hero__crest-glow{ position:absolute; inset:-16%; z-index:0; border-radius:50%; filter:blur(8px);
-    background:radial-gradient(circle, rgba(184,58,84,.5), rgba(184,58,84,0) 62%); animation:crestGlow 4.5s ease-in-out infinite; }
-  .hero__crest-shine{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.9;
+  .hero__crestwrap{ position:relative; display:flex; justify-content:center; align-items:center; perspective:1000px; }
+  .hero__crest-stage{ position:relative; width:min(360px,82%); transform-style:preserve-3d; will-change:transform; animation:crestFloat 6s ease-in-out infinite; }
+  .hero__crest{ display:block; width:100%; position:relative; z-index:1; filter:brightness(.88) drop-shadow(0 26px 46px rgba(0,0,0,.55)); }
+  .hero__crest-glow{ position:absolute; inset:-26%; z-index:0; border-radius:50%; filter:blur(10px);
+    background:radial-gradient(circle, rgba(184,58,84,.7), rgba(184,58,84,0) 60%); animation:crestGlow 3.4s ease-in-out infinite; }
+  .hero__crest-shine{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:1; mix-blend-mode:screen;
     -webkit-mask:url("assets/nmb-logo-white.webp") center/100% 100% no-repeat; mask:url("assets/nmb-logo-white.webp") center/100% 100% no-repeat;
-    background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.85) 50%, transparent 60%); background-size:260% 100%; background-position:170% 0;
-    animation:crestShine 5.5s ease-in-out infinite; }
-  @keyframes crestFloat{ 0%,100%{ transform:translateY(0) rotateY(-7deg) rotateX(2deg); } 50%{ transform:translateY(-14px) rotateY(7deg) rotateX(-2deg); } }
-  @keyframes crestGlow{ 0%,100%{ opacity:.45; transform:scale(.95); } 50%{ opacity:.9; transform:scale(1.05); } }
-  @keyframes crestShine{ 0%,20%{ background-position:170% 0; } 46%,100%{ background-position:-70% 0; } }
-  @media (prefers-reduced-motion: reduce){ .hero__crest-stage,.hero__crest-glow,.hero__crest-shine{ animation:none; } }
+    background:linear-gradient(100deg, transparent 32%, rgba(255,255,255,1) 50%, transparent 68%); background-size:230% 100%; background-position:180% 0;
+    animation:crestShine 3.6s ease-in-out infinite; }
+  @keyframes crestFloat{ 0%,100%{ transform:translateY(0) rotateY(-18deg) rotateX(6deg) rotateZ(-2deg) scale(1); } 50%{ transform:translateY(-26px) rotateY(18deg) rotateX(-6deg) rotateZ(2deg) scale(1.04); } }
+  @keyframes crestGlow{ 0%,100%{ opacity:.35; transform:scale(.85); } 50%{ opacity:1; transform:scale(1.2); } }
+  @keyframes crestShine{ 0%,10%{ background-position:180% 0; } 40%,100%{ background-position:-80% 0; } }
+  @media (prefers-reduced-motion: reduce){ .hero__crest-stage,.hero__crest-glow,.hero__crest-shine{ animation:none; } .hero__crest{ filter:drop-shadow(0 26px 46px rgba(0,0,0,.55)); } }
 
   .hero__scroll{ position:relative; z-index:2; margin-top:clamp(2rem,5vw,3.5rem); display:flex; align-items:center; gap:.6rem;
     color:var(--muted-on-navy); font-weight:700; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; }
@@ -1379,7 +1379,7 @@ const CONFIG = {
       var py = (e.clientY - r.top) / r.height - 0.5;
       _crest.style.transition = 'transform .12s ease-out';
       _crest.style.animation = 'none';
-      _crest.style.transform = 'perspective(850px) rotateY(' + (px * 11) + 'deg) rotateX(' + (-py * 11) + 'deg)';
+      _crest.style.transform = 'rotateY(' + (px * 20) + 'deg) rotateX(' + (-py * 20) + 'deg) scale(1.05)';
     });
     _hero.addEventListener('mouseleave', function(){
       _crest.style.transition = 'transform .4s ease';
