@@ -37,6 +37,7 @@ export default function AdminPage() {
   const [tab, setTab] = useState('registrations');
   const [loading, setLoading] = useState(true);
   const [configured, setConfigured] = useState(true);
+  const [dbError, setDbError] = useState('');
   const [stats, setStats] = useState({ registrations: 0, donations: 0, donationTotal: 0, uniforms: 0 });
   const [regs, setRegs] = useState([]);
   const [dons, setDons] = useState([]);
@@ -52,6 +53,7 @@ export default function AdminPage() {
       getJSON('/api/admin/uniforms'),
     ]);
     setConfigured(s.configured !== false);
+    setDbError(r.error || s.error || d.error || u.error || '');
     setStats(s || {});
     setRegs(r.rows || []);
     setDons(d.rows || []);
@@ -85,6 +87,13 @@ export default function AdminPage() {
           </div>
         ) : null}
 
+        {configured && dbError ? (
+          <div className="notice warn">
+            <strong>Database error:</strong> {dbError}. Check that the schema SQL was run and that
+            SUPABASE_SERVICE_ROLE_KEY is the <em>service_role</em> key (not the anon key).
+          </div>
+        ) : null}
+
         <div className="stats">
           <div className="tile"><div className="k">Registrations</div><div className="v">{stats.registrations ?? 0}</div></div>
           <div className="tile"><div className="k">Donations</div><div className="v">{stats.donations ?? 0}</div></div>
@@ -92,23 +101,26 @@ export default function AdminPage() {
           <div className="tile"><div className="k">Uniform items</div><div className="v">{stats.uniforms ?? 0}</div></div>
         </div>
 
-        <nav className="tabs">
-          {TABS.map((t) => (
-            <button key={t.id} className={tab === t.id ? 'active' : ''} onClick={() => setTab(t.id)}>{t.label}</button>
-          ))}
-        </nav>
-
-        {loading ? (
-          <div className="panel"><div className="loading">Loading…</div></div>
-        ) : tab === 'registrations' ? (
-          <Registrations rows={regs} setRows={setRegs} />
-        ) : tab === 'donations' ? (
-          <Donations rows={dons} total={donTotal} />
-        ) : tab === 'uniforms' ? (
-          <Uniforms rows={unis} setRows={setUnis} reload={load} />
-        ) : (
-          <Communications regs={regs} />
-        )}
+        <div className="admin-main">
+          <div className="admin-panel">
+            {loading ? (
+              <div className="panel"><div className="loading">Loading…</div></div>
+            ) : tab === 'registrations' ? (
+              <Registrations rows={regs} setRows={setRegs} />
+            ) : tab === 'donations' ? (
+              <Donations rows={dons} total={donTotal} />
+            ) : tab === 'uniforms' ? (
+              <Uniforms rows={unis} setRows={setUnis} reload={load} />
+            ) : (
+              <Communications regs={regs} />
+            )}
+          </div>
+          <nav className="tabs tabs--side">
+            {TABS.map((t) => (
+              <button key={t.id} className={tab === t.id ? 'active' : ''} onClick={() => setTab(t.id)}>{t.label}</button>
+            ))}
+          </nav>
+        </div>
       </div>
     </div>
   );
