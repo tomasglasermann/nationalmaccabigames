@@ -217,10 +217,18 @@
   .hero__actions{ margin-top:2rem; display:flex; flex-wrap:wrap; gap:.9rem; }
 
   .hero__crestwrap{ position:relative; display:flex; justify-content:center; align-items:center; }
-  .hero__crest{ width:min(360px, 82%); color:#fff; filter:drop-shadow(0 24px 40px rgba(0,0,0,.45)); animation:floaty 7s ease-in-out infinite; }
-  @media (prefers-reduced-motion: reduce){ .hero__crest{ animation:none; } }
-  @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
-  .hero__crest .ring{ opacity:.0; }
+  .hero__crest-stage{ position:relative; width:min(360px,82%); transform-style:preserve-3d; will-change:transform; animation:crestFloat 7s ease-in-out infinite; }
+  .hero__crest{ display:block; width:100%; position:relative; z-index:1; filter:drop-shadow(0 24px 40px rgba(0,0,0,.45)); }
+  .hero__crest-glow{ position:absolute; inset:-16%; z-index:0; border-radius:50%; filter:blur(8px);
+    background:radial-gradient(circle, rgba(184,58,84,.5), rgba(184,58,84,0) 62%); animation:crestGlow 4.5s ease-in-out infinite; }
+  .hero__crest-shine{ position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.9;
+    -webkit-mask:url("assets/nmb-logo-white.webp") center/100% 100% no-repeat; mask:url("assets/nmb-logo-white.webp") center/100% 100% no-repeat;
+    background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.85) 50%, transparent 60%); background-size:260% 100%; background-position:170% 0;
+    animation:crestShine 5.5s ease-in-out infinite; }
+  @keyframes crestFloat{ 0%,100%{ transform:translateY(0) rotateY(-7deg) rotateX(2deg); } 50%{ transform:translateY(-14px) rotateY(7deg) rotateX(-2deg); } }
+  @keyframes crestGlow{ 0%,100%{ opacity:.45; transform:scale(.95); } 50%{ opacity:.9; transform:scale(1.05); } }
+  @keyframes crestShine{ 0%,20%{ background-position:170% 0; } 46%,100%{ background-position:-70% 0; } }
+  @media (prefers-reduced-motion: reduce){ .hero__crest-stage,.hero__crest-glow,.hero__crest-shine{ animation:none; } }
 
   .hero__scroll{ position:relative; z-index:2; margin-top:clamp(2rem,5vw,3.5rem); display:flex; align-items:center; gap:.6rem;
     color:var(--muted-on-navy); font-weight:700; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; }
@@ -232,7 +240,7 @@
   @media (max-width:860px){
     .hero__grid{ grid-template-columns:1fr; }
     .hero__crestwrap{ order:-1; margin-bottom:.5rem; }
-    .hero__crest{ width:min(240px,62%); }
+    .hero__crest-stage{ width:min(240px,62%); }
   }
 
   /* ============================================================ STATS */
@@ -505,7 +513,7 @@
   .btn:hover::after{ left:150%; transition:left .75s ease; }
 
   /* ===== WOW: hero crest depth ===== */
-  .hero__crest{ transform-style:preserve-3d; will-change:transform; }
+  /* crest depth + float handled on .hero__crest-stage */
 
   /* ===== WOW: page-load curtain + logo reveal ===== */
   #preloader{ position:fixed; inset:0; z-index:9999; display:grid; place-items:center; overflow:hidden; pointer-events:none;
@@ -666,7 +674,11 @@
       </div>
 
       <div class="hero__crestwrap">
-        <img class="hero__crest" src="assets/nmb-logo-white.webp" alt="NMB delegation crest — MARJCC North Miami Beach · JCC National Maccabi Games">
+        <div class="hero__crest-stage" id="heroCrest">
+          <span class="hero__crest-glow" aria-hidden="true"></span>
+          <img class="hero__crest" src="assets/nmb-logo-white.webp" alt="NMB delegation crest — MARJCC North Miami Beach · JCC National Maccabi Games">
+          <span class="hero__crest-shine" aria-hidden="true"></span>
+        </div>
       </div>
     </div>
 
@@ -1340,7 +1352,7 @@ const CONFIG = {
   var _bar = document.getElementById('scrollbar');
   var _stars = document.querySelector('.hero__stars');
   var _glow = document.querySelector('.hero__glow');
-  var _crest = document.querySelector('.hero__crest');
+  var _crest = document.querySelector('.hero__crest-stage');
   var _hero = document.getElementById('hero');
   var _reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var _ticking = false;
