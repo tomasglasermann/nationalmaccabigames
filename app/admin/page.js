@@ -110,10 +110,10 @@ export default function AdminPage() {
         ) : null}
 
         <div className="stats">
-          <div className="tile"><div className="k">Registrations</div><div className="v">{stats.registrations ?? 0}</div></div>
-          <div className="tile"><div className="k">Donations</div><div className="v">{stats.donations ?? 0}</div></div>
-          <div className="tile"><div className="k">Raised</div><div className="v">{money(stats.donationTotal)}</div></div>
-          <div className="tile"><div className="k">Uniform items</div><div className="v">{stats.uniforms ?? 0}</div></div>
+          <div className="tile"><div className="k">Registrations</div><div className="v">{regs.length}</div></div>
+          <div className="tile"><div className="k">Donations</div><div className="v">{dons.length}</div></div>
+          <div className="tile"><div className="k">Raised</div><div className="v">{money(donTotal)}</div></div>
+          <div className="tile"><div className="k">Uniform items</div><div className="v">{unis.length}</div></div>
         </div>
 
         {loading ? (
