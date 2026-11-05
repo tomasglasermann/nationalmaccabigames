@@ -150,11 +150,11 @@
     .nav__links{
       position:absolute; top:100%; left:0; right:0;
       flex-direction:column; align-items:stretch; gap:0;
-      background:rgba(6,21,39,.98); border-bottom:1px solid var(--line-on-navy);
+      background:#061527; border-bottom:1px solid var(--line-on-navy);
       padding:.5rem var(--gut-r) 1rem var(--gut-l);
       max-height:0; overflow:hidden; transition:max-height .32s ease;
     }
-    .nav__links.open{ max-height:420px; }
+    .nav__links.open{ max-height:calc(100vh - var(--nav-h)); max-height:calc(100dvh - var(--nav-h)); overflow-y:auto; }
     .nav__links a.link{ padding:.9rem .2rem; border-bottom:1px solid var(--line-on-navy); font-size:.95rem; }
     .nav__links a.link::after{ display:none; }
     .nav__links .btn{ margin-top:.9rem; }
