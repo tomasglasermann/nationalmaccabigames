@@ -150,11 +150,14 @@
     .nav__links{
       position:absolute; top:100%; left:0; right:0;
       flex-direction:column; align-items:stretch; gap:0;
-      background:#061527; border-bottom:1px solid var(--line-on-navy);
-      padding:.5rem var(--gut-r) 1rem var(--gut-l);
-      max-height:0; overflow:hidden; transition:max-height .32s ease;
+      background:#061527; border-bottom:0 solid var(--line-on-navy);
+      padding:0 var(--gut-r) 0 var(--gut-l);
+      max-height:0; overflow:hidden; visibility:hidden;
+      transition:max-height .32s ease, padding .32s ease, visibility 0s linear .32s;
     }
-    .nav__links.open{ max-height:calc(100vh - var(--nav-h)); max-height:calc(100dvh - var(--nav-h)); overflow-y:auto; }
+    .nav__links.open{ max-height:calc(100vh - var(--nav-h)); max-height:calc(100dvh - var(--nav-h)); overflow-y:auto;
+      padding-top:.5rem; padding-bottom:1rem; border-bottom-width:1px; visibility:visible;
+      transition:max-height .32s ease, padding .32s ease, visibility 0s; }
     .nav__links a.link{ padding:.9rem .2rem; border-bottom:1px solid var(--line-on-navy); font-size:.95rem; }
     .nav__links a.link::after{ display:none; }
     .nav__links .btn{ margin-top:.9rem; }
