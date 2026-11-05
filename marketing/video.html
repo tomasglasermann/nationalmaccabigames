@@ -1,0 +1,131 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--n8:#081d38;--n9:#061527;--burg:#800020;--b4:#b83a54;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{font-family:'Inter',sans-serif;color:#fff;position:relative;
+ background:radial-gradient(1100px 800px at 80% 2%, rgba(128,0,32,.55), transparent 60%),
+ radial-gradient(900px 700px at 0% 100%, rgba(28,58,102,.6), transparent 60%),
+ linear-gradient(165deg,var(--n8),var(--n9));}
+.stars{position:absolute;inset:-200px;opacity:.55;background-size:180px 156px;
+ background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='120'%20height='104'%3E%3Cg%20fill='none'%20stroke='%23ffffff'%20stroke-opacity='0.14'%20stroke-width='1.4'%20stroke-linejoin='round'%3E%3Cpolygon%20points='60,16 25,76 95,76'/%3E%3Cpolygon%20points='60,88 25,28 95,28'/%3E%3C/g%3E%3C/svg%3E");}
+.abs{position:absolute;left:0;right:0;text-align:center}
+.partners{top:200px;display:flex;justify-content:center;align-items:center;gap:36px}
+.partners img{height:64px}.partners .sep{width:2px;height:56px;background:rgba(255,255,255,.3)}
+.crest{left:50%;width:360px}
+.crest img{width:100%;position:relative;filter:drop-shadow(0 30px 50px rgba(0,0,0,.55))}
+.crest::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(184,58,84,.6),transparent 60%);filter:blur(10px)}
+.kicker{display:flex;justify-content:center;align-items:center;gap:18px;color:var(--b4);font-weight:800;font-size:26px;letter-spacing:.32em}
+.kicker i{display:inline-block;width:20px;height:8px;transform:skewX(-25deg);background:#fff}.kicker i.r{background:var(--b4)}
+.h1{font-weight:900;font-style:italic;font-size:150px;line-height:.9;letter-spacing:-.03em;text-transform:uppercase}
+.nmb{color:transparent;-webkit-text-stroke:4px var(--b4)}
+.sub{font-weight:900;font-style:italic;font-size:50px;text-transform:uppercase}.sub b{color:var(--b4)}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 16px;padding:0 60px}
+.tag{font-weight:800;font-size:25px;letter-spacing:.06em;text-transform:uppercase;padding:14px 26px;border-radius:999px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.18)}
+.cta{font-weight:900;font-style:italic;font-size:62px;text-transform:uppercase;line-height:1}
+.cta2{font-size:32px;font-weight:600;color:#d6ddea}
+.arrow{font-size:54px;color:var(--b4)}
+.sechead .k{color:var(--b4);font-weight:800;font-size:26px;letter-spacing:.32em}
+.sechead .t{margin-top:14px;font-weight:900;font-style:italic;font-size:82px;line-height:.95;text-transform:uppercase}
+.card{position:absolute;left:60px;top:640px;width:960px;height:640px;border-radius:28px;overflow:hidden;
+ box-shadow:0 40px 80px rgba(0,0,0,.55);border:4px solid rgba(255,255,255,.9)}
+.card img{width:100%;height:100%;object-fit:cover;transform-origin:center}
+.card .bar{position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--burg)}
+.label{top:1330px}
+.label .s{font-weight:900;font-style:italic;font-size:76px;text-transform:uppercase}
+.label .c{margin-top:8px;font-weight:800;font-size:26px;letter-spacing:.3em;color:var(--b4)}
+.foot{bottom:210px;display:flex;justify-content:center;gap:24px;font-weight:900;font-style:italic;font-size:30px;letter-spacing:.04em;text-transform:uppercase}
+.foot span:nth-child(2){color:var(--b4)}
+.ribbon{position:absolute;left:0;bottom:0;height:14px;background:linear-gradient(90deg,var(--burg) 0 50%,#fff 50% 52%,var(--b4) 52%)}
+.flash{position:absolute;inset:0;background:#fff;pointer-events:none}
+</style></head><body>
+<div class="stars" id="stars"></div>
+<div class="abs partners" id="partners"><img src="../public/assets/jccmaccabi-logo-white.webp"><span class="sep"></span><img src="../public/assets/marjcc-logo-white.webp"></div>
+
+<!-- intro / outro shared pieces -->
+<div class="abs crest" id="crest" style="right:auto"><img src="../public/assets/nmb-logo-white.webp"></div>
+<div class="abs kicker" id="kicker"><i></i><i class="r"></i>NORTH MIAMI BEACH<i class="r"></i><i></i></div>
+<div class="abs h1" id="l1">Let's go</div>
+<div class="abs h1" id="l2"><span class="nmb">NMB!</span></div>
+<div class="abs sub" id="sub"><b>›</b> Road to Austin 2027</div>
+
+<!-- photos -->
+<div class="abs sechead" id="sechead"><div class="k">THE DELEGATION</div><div class="t">One team.<br>One mission.</div></div>
+<div id="cards"></div>
+<div class="abs label" id="label"><div class="s" id="ls"></div><div class="c" id="lc"></div></div>
+
+<!-- outro -->
+<div class="abs tags" id="tags"><span class="tag">JCC Maccabi Games</span><span class="tag">Austin, TX</span><span class="tag">July 25–30, 2027</span></div>
+<div class="abs cta" id="cta">Want to compete?</div>
+<div class="abs cta2" id="cta2">Athletes ages 13–17 · Tap the link if you're interested</div>
+<div class="abs arrow" id="arrow">▼</div>
+
+<div class="abs foot" id="foot"><span>#NMBtoAustin</span><span>·</span><span>Let's go NMB!</span></div>
+<div class="ribbon" id="ribbon"></div>
+<div class="flash" id="flash"></div>
+<script>
+const PH=[['nmb-01','Basketball','50% 30%'],['nmb-02','Soccer','50% 50%'],['nmb-04','Tennis','62% 50%'],['nmb-03','Soccer','45% 50%'],['nmb-05','Basketball','35% 50%'],['nmb-06','Swimming','50% 25%']];
+const cards=document.getElementById('cards');
+PH.forEach(p=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<img src="../public/assets/gallery/${p[0]}.webp" style="object-position:${p[2]}"><span class="bar"></span>`;cards.appendChild(d)});
+const $=id=>document.getElementById(id);
+const cl=(x)=>Math.max(0,Math.min(1,x));
+const p=(t,a,b)=>cl((t-a)/(b-a));
+const eo=x=>1-Math.pow(1-x,3);
+const eb=x=>{const c1=1.70158,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const ei=x=>x*x*x;
+function set(el,{x=0,y=0,s=1,r=0,o=1,top}){ if(top!==undefined) el.style.top=top+'px';
+  el.style.opacity=o; el.style.transform=`translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`; }
+const PS=3.2, PD=1.6, PE=PS+PH.length*PD, DUR=18.5;
+window.DUR=DUR;
+window.render=function(t){
+  $('stars').style.transform=`translateY(${-(t*12)%156}px)`;
+  $('ribbon').style.width=(cl(t/DUR)*100)+'%';
+  set($('partners'),{o:eo(p(t,.2,.8)),y:(1-eo(p(t,.2,.8)))*-30});
+  $('flash').style.opacity= t<0.25 ? 0 : Math.max(0, .5-(t-.9)*2.5)*(t>.9?1:0);
+  // phases: intro [0,PS], photos [PS,PE], outro [PE,DUR]
+  const outI=p(t,PS-.55,PS-.1), inO=p(t,PE,PE+.6);
+  const intro = t<PE;
+  // crest
+  const crest=$('crest');
+  if(intro){ const a=eb(p(t,.3,1.0)); set(crest,{x:-180,top:330,s:.4+.6*a,o:cl(p(t,.3,.6))*(1-outI),y:-outI*80, r:(1-a)*-12}); }
+  else { const a=eo(inO); set(crest,{x:-180,top:300,s:.72,o:a,y:(1-a)*40}); }
+  // kicker
+  if(intro){ const a=eo(p(t,.9,1.3)); set($('kicker'),{top:770,o:a*(1-outI),y:(1-a)*20-outI*80}); }
+  else { const a=eo(p(t,PE+.1,PE+.6)); set($('kicker'),{top:610,o:a,y:(1-a)*30}); }
+  // headline
+  if(intro){ const a=eo(p(t,1.1,1.5)), b=eb(p(t,1.4,1.85));
+    set($('l1'),{top:840,x:(1-a)*-900,o:cl(a*2)*(1-outI),y:-outI*80});
+    set($('l2'),{top:975,s:1+(1-b)*1.2,o:cl(p(t,1.4,1.6))*(1-outI),y:-outI*80});
+  } else { const a=eo(p(t,PE+.2,PE+.7)), b=eb(p(t,PE+.35,PE+.85));
+    set($('l1'),{top:680,x:(1-a)*-900,o:a}); set($('l2'),{top:815,s:1+(1-b)*.8,o:cl(p(t,PE+.35,PE+.55))}); }
+  if(intro){ const a=eo(p(t,1.9,2.3)); set($('sub'),{top:1150,o:a*(1-outI),y:(1-a)*30-outI*80}); }
+  else { const a=eo(p(t,PE+.6,PE+1.0)); set($('sub'),{top:975,o:a,y:(1-a)*30}); }
+  // section head
+  const sh=eo(p(t,PS-.1,PS+.4))*(1-p(t,PE-.3,PE));
+  set($('sechead'),{top:360,o:sh,y:(1-eo(p(t,PS-.1,PS+.4)))*40});
+  // cards
+  [...cards.children].forEach((c,i)=>{
+    const st=PS+i*PD, en=st+PD; const img=c.firstChild;
+    if(t<st-.05||t>en+.45){c.style.opacity=0;return;}
+    const a=eo(p(t,st,st+.45)), z=p(t,st,en+.45);
+    const out=ei(p(t,en,en+.45));
+    const last = i===PH.length-1;
+    const ox = last? 0 : -1200*out, oo = last? 1-p(t,PE-.3,PE) : 1;
+    set(c,{x:(1-a)*1200+ox, r:(1-a)*8 - (last?0:out*-6), o:oo});
+    c.style.zIndex=10+i;
+    img.style.transform=`scale(${1.04+z*.12})`;
+  });
+  // label
+  let idx=Math.floor((t-PS)/PD); idx=Math.max(0,Math.min(PH.length-1,idx));
+  const lt=t-(PS+idx*PD);
+  $('ls').textContent=PH[idx][1]; $('lc').textContent=String(idx+1).padStart(2,'0')+' / '+String(PH.length).padStart(2,'0');
+  const la=eo(cl((lt-.2)/.35))*(1-cl((lt-(PD-.15))/.15)*(idx<PH.length-1?1:0));
+  set($('label'),{o:(t>=PS?la:0)*(1-p(t,PE-.3,PE)),y:(1-la)*30});
+  // outro rest
+  const tg=eo(p(t,PE+.9,PE+1.3)); set($('tags'),{top:1060,o:tg,y:(1-tg)*30});
+  const ca=eb(p(t,PE+1.3,PE+1.8)); set($('cta'),{top:1190,o:cl(p(t,PE+1.3,PE+1.5)),s:.6+.4*ca});
+  const c2=eo(p(t,PE+1.6,PE+2.0)); set($('cta2'),{top:1275,o:c2,y:(1-c2)*20});
+  const ar=eo(p(t,PE+1.9,PE+2.2)); set($('arrow'),{top:1330,o:ar,y:Math.abs(Math.sin((t-PE)*4))*-18});
+  const ft=eo(p(t,PE+2.1,PE+2.5)); set($('foot'),{o:ft});
+};
+render(0);
+</script></body></html>
