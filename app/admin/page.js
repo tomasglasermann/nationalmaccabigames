@@ -170,6 +170,30 @@ function Registrations({ rows, setRows }) {
       body: JSON.stringify({ id, notes }),
     });
   }
+  // Save edited fields. Returns true on success, false on error.
+  async function saveRow(id, patch) {
+    const res = await fetch('/api/admin/registrations', {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, ...patch }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return false;
+    const next = data.row || { ...patch, id };
+    setRows((prev) => prev.map((x) => (x.id === id ? { ...x, ...next } : x)));
+    setOpen((o) => (o && o.id === id ? { ...o, ...next } : o));
+    return true;
+  }
+  // Delete a registration (optimistic; reverts on error).
+  async function removeRow(id) {
+    const prevRows = rows;
+    setRows((prev) => prev.filter((x) => x.id !== id));
+    setOpen((o) => (o && o.id === id ? null : o));
+    const res = await fetch('/api/admin/registrations', {
+      method: 'DELETE', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id }),
+    });
+    if (!res.ok) { setRows(prevRows); alert('Could not delete. Please try again.'); }
+  }
 
   function exportCSV() {
     const cols = [
@@ -226,65 +250,106 @@ function Registrations({ rows, setRows }) {
                       {REG_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </td>
-                  <td><button className="btn-sm" onClick={() => setOpen(r)}>View</button></td>
+                  <td className="row-actions">
+                    <button className="btn-sm" onClick={() => setOpen(r)}>View</button>
+                    <button className="btn-sm btn-danger" onClick={() => {
+                      if (window.confirm(`Delete the registration for ${fullName(r.participant_first_name, r.participant_last_name)}? This can't be undone.`)) removeRow(r.id);
+                    }}>Delete</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
-      {open ? <RegDetail row={open} onClose={() => setOpen(null)} onStatus={setStatusFor} onSaveNotes={saveNotes} /> : null}
+      {open ? <RegDetail row={open} onClose={() => setOpen(null)} onSaveRow={saveRow} onDelete={removeRow} /> : null}
     </div>
   );
 }
 
-function RegDetail({ row, onClose, onStatus, onSaveNotes }) {
-  const [notes, setNotes] = useState(row.notes || '');
-  const [copied, setCopied] = useState(false);
-  const field = (label, value) => (
-    <div className="kv"><span className="kv-k">{label}</span><span className="kv-v">{value || '—'}</span></div>
-  );
-  function copyEmail() {
-    if (row.parent1_email && navigator.clipboard) {
-      navigator.clipboard.writeText(row.parent1_email).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => {});
-    }
+const REG_FIELDS = [
+  ['participant_first_name', 'Participant first name'],
+  ['participant_last_name', 'Participant last name'],
+  ['participant_dob', 'Date of birth'],
+  ['participant_phone', 'Participant phone'],
+  ['parent1_first_name', 'Parent / guardian first name'],
+  ['parent1_last_name', 'Parent / guardian last name'],
+  ['parent1_email', 'Parent email'],
+  ['parent1_phone', 'Parent phone'],
+];
+
+function RegDetail({ row, onClose, onSaveRow, onDelete }) {
+  const blank = () => {
+    const f = { status: row.status || 'new', notes: row.notes || '', sport: row.sport || '' };
+    REG_FIELDS.forEach(([k]) => { f[k] = row[k] || ''; });
+    return f;
+  };
+  const [form, setForm] = useState(blank);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const set = (k) => (e) => { setForm((f) => ({ ...f, [k]: e.target.value })); setSaved(false); };
+
+  const dirty = useMemo(() => {
+    if ((form.status || 'new') !== (row.status || 'new')) return true;
+    if ((form.notes || '') !== (row.notes || '')) return true;
+    if ((form.sport || '') !== (row.sport || '')) return true;
+    return REG_FIELDS.some(([k]) => (form[k] || '') !== (row[k] || ''));
+  }, [form, row]);
+
+  async function save() {
+    setSaving(true);
+    const ok = await onSaveRow(row.id, { ...form });
+    setSaving(false);
+    if (ok) { setSaved(true); setTimeout(() => setSaved(false), 1800); }
+    else alert('Could not save. Please try again.');
   }
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
-          <h3>{fullName(row.participant_first_name, row.participant_last_name)}</h3>
+          <h3>Edit registration</h3>
           <button className="modal-x" onClick={onClose} aria-label="Close">×</button>
         </div>
         <div className="modal-body">
-          {field('Sport', row.sport)}
-          {field('Date of birth', row.participant_dob)}
-          {field('Participant phone', row.participant_phone)}
-          {field('Parent / Guardian', fullName(row.parent1_first_name, row.parent1_last_name))}
           <div className="kv">
-            <span className="kv-k">Parent email</span>
-            <span className="kv-v">{row.parent1_email || '—'}{' '}
-              {row.parent1_email ? <button className="btn-sm" style={{ padding: '2px 8px', marginLeft: 6 }} onClick={copyEmail}>{copied ? 'Copied!' : 'Copy'}</button> : null}
+            <span className="kv-k">Sport</span>
+            <span className="kv-v">
+              <select className="status-select" value={form.sport} onChange={set('sport')}>
+                <option value="">—</option>
+                {(SPORTS.includes(form.sport) || !form.sport ? SPORTS : [form.sport, ...SPORTS]).map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
             </span>
           </div>
-          {field('Parent phone', row.parent1_phone)}
-          {field('Submitted', fmtDate(row.created_at))}
+          {REG_FIELDS.map(([k, label]) => (
+            <div className="kv" key={k}>
+              <span className="kv-k">{label}</span>
+              <span className="kv-v"><input className="edit-input" type="text" value={form[k]} onChange={set(k)} /></span>
+            </div>
+          ))}
           <div className="kv">
             <span className="kv-k">Status</span>
             <span className="kv-v">
-              <select className="status-select" value={row.status || 'new'} onChange={(e) => onStatus(row.id, e.target.value)}>
+              <select className="status-select" value={form.status} onChange={set('status')}>
                 {REG_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
               </select>
             </span>
           </div>
+          <div className="kv"><span className="kv-k">Submitted</span><span className="kv-v">{fmtDate(row.created_at)}</span></div>
           <div className="kv kv-notes">
             <span className="kv-k">Notes</span>
-            <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Internal notes…" />
+            <textarea value={form.notes} onChange={set('notes')} placeholder="Internal notes…" />
           </div>
         </div>
         <div className="modal-foot">
+          <button className="btn-sm btn-danger" onClick={() => {
+            if (window.confirm(`Delete the registration for ${fullName(row.participant_first_name, row.participant_last_name)}? This can't be undone.`)) onDelete(row.id);
+          }}>Delete</button>
+          <span className="modal-foot__spacer" />
           <button className="btn-sm" onClick={onClose}>Close</button>
-          <button className="btn-sm btn-dark" onClick={() => { onSaveNotes(row.id, notes); onClose(); }}>Save notes</button>
+          <button className="btn-sm btn-dark" onClick={save} disabled={saving || !dirty}>
+            {saving ? 'Saving…' : saved ? 'Saved ✓' : 'Save changes'}
+          </button>
         </div>
       </div>
     </div>

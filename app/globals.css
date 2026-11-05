@@ -91,6 +91,13 @@ input,select,textarea{ font-family:inherit; }
 .btn-sm{ border:1.5px solid var(--line); background:#fff; border-radius:9px; padding:8px 12px; font-weight:700; font-size:.8rem; }
 .btn-sm:hover{ border-color:var(--navy); }
 .btn-dark{ background:var(--navy); color:#fff; border-color:var(--navy); }
+.btn-danger{ color:#b00020; border-color:#f0c4cc; }
+.btn-danger:hover{ border-color:#b00020; background:#fff5f6; }
+.btn-sm:disabled{ opacity:.5; cursor:not-allowed; }
+.row-actions{ display:flex; gap:6px; }
+.edit-input{ width:100%; border:1.5px solid var(--line); border-radius:8px; padding:6px 9px; font-size:.86rem; font-family:inherit; }
+.edit-input:focus{ outline:none; border-color:var(--navy); }
+.modal-foot__spacer{ flex:1; }
 
 .table-wrap{ overflow-x:auto; }
 table{ width:100%; border-collapse:collapse; font-size:.86rem; }

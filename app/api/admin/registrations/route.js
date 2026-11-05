@@ -15,7 +15,20 @@ export async function GET() {
   return Response.json({ configured: true, rows: data || [] });
 }
 
-// Update a registration's status or notes.
+// Editable text fields (besides status/notes), with length caps.
+const EDITABLE = {
+  participant_first_name: 120,
+  participant_last_name: 120,
+  participant_phone: 40,
+  participant_dob: 40,
+  parent1_first_name: 120,
+  parent1_last_name: 120,
+  parent1_email: 160,
+  parent1_phone: 40,
+  sport: 80,
+};
+
+// Update a registration's status, notes, or any editable field.
 export async function PATCH(req) {
   if (!supabaseConfigured()) return Response.json({ error: 'not configured' }, { status: 503 });
   let body;
@@ -29,8 +42,35 @@ export async function PATCH(req) {
   const patch = {};
   if (typeof status === 'string') patch.status = status.slice(0, 40);
   if (typeof notes === 'string') patch.notes = notes.slice(0, 2000);
+  for (const [key, max] of Object.entries(EDITABLE)) {
+    if (typeof body[key] === 'string') patch[key] = body[key].trim().slice(0, max);
+  }
+  if (Object.keys(patch).length === 0) {
+    return Response.json({ error: 'Nothing to update' }, { status: 400 });
+  }
   const sb = getSupabase();
-  const { error } = await sb.from('registrations').update(patch).eq('id', id);
+  const { data, error } = await sb.from('registrations').update(patch).eq('id', id).select().single();
+  if (error) return Response.json({ error: error.message }, { status: 500 });
+  return Response.json({ ok: true, row: data });
+}
+
+// Delete a registration.
+export async function DELETE(req) {
+  if (!supabaseConfigured()) return Response.json({ error: 'not configured' }, { status: 503 });
+  let id = '';
+  try {
+    const body = await req.json();
+    id = body && body.id;
+  } catch {
+    id = '';
+  }
+  if (!id) {
+    const u = new URL(req.url);
+    id = u.searchParams.get('id') || '';
+  }
+  if (!id) return Response.json({ error: 'Missing id' }, { status: 400 });
+  const sb = getSupabase();
+  const { error } = await sb.from('registrations').delete().eq('id', id);
   if (error) return Response.json({ error: error.message }, { status: 500 });
   return Response.json({ ok: true });
 }
