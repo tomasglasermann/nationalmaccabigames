@@ -386,8 +386,9 @@
   .tier .price{ font-weight:900; font-style:italic; font-size:2.1rem; margin-top:.3rem; line-height:1; font-variant-numeric:tabular-nums; }
   .tier .price small{ font-size:.9rem; font-weight:700; opacity:.7; }
   .tier__body{ padding:1.2rem 1.4rem 1.5rem; display:flex; flex-direction:column; gap:.8rem; flex:1; }
-  .tier__body li{ display:flex; gap:.6rem; align-items:flex-start; font-size:.9rem; color:var(--ink); }
-  .tier__body li .chk{ color:var(--burgundy); flex:none; font-weight:900; }
+  .tier__body li{ position:relative; padding-left:1.5rem; font-size:.9rem; color:var(--ink); line-height:1.5; }
+  .tier__body li .chk{ position:absolute; left:0; top:.1rem; color:var(--burgundy); font-weight:900; }
+  .tier__body li:last-child{ padding-left:0; margin-top:auto; }
   .tier__body .btn{ margin-top:auto; }
   .tier.featured{ border-color:var(--burgundy); box-shadow:0 30px 60px -28px rgba(128,0,32,.55); }
   .tier.featured .tier__top{ background:var(--burgundy); }
